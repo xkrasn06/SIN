@@ -16,8 +16,36 @@ public class PaintPanel extends JPanel {
         int SB3 = MainWindow.getSB3();
         int SB2 = MainWindow.getSB2();
         int SB1 = MainWindow.getSB1();
-        int x = 705;
-        int y = 405;
+        static final int x = 705;
+        static final int y = 405;
+        // Y suradnice cesty zlava
+        static final int vertWidth = 100;
+        
+        static final int hordownY = 400;
+        static final int horupY = hordownY - vertWidth;
+        
+        // Y suradnica spodneho okraja
+        static final int downY = 800;
+        static final int secY = 50;
+        static final int thirdY = 100;
+        
+        // X suradnica laveho okraja
+        static final int startX = 0;
+        
+        // X suradnica prve prerusenie
+        static final int firstX = 200;
+        
+        // X suradnica druhe prerusenie (zaciatok)
+        static final int secX = 350;
+        
+        //X suradnica krizovatka
+        static final int thirdX = 625;
+        
+        // sirka krizovatky
+        static final int Xdiff = 150;
+        
+        // pravy okraj
+        static final int fifthX = 1400;
         int N = 4;
         double length = 30;
         int dx = (int) length;
@@ -37,11 +65,35 @@ public class PaintPanel extends JPanel {
                 super.paintComponent(g);
                 g.setColor(Color.black);
                  g2D.setStroke(new BasicStroke(5));
-                g2D.drawLine(0,400,625, 400);
-                g2D.drawLine(0,250,625, 250);
-                 g2D.drawLine(775,400,1400, 400);
-                 g2D.drawLine(625,400,625, 800);
-                  g2D.drawLine(775,400,775, 800);
+                 
+                 // spodna horizontalna  linia nalavo
+                g2D.drawLine(startX,hordownY,firstX, hordownY); 
+                g2D.drawLine(firstX+secX,hordownY,thirdX, hordownY);
+                // horna horizontalna  linia nalavo
+                g2D.drawLine(startX,horupY,thirdX, horupY);
+                
+                // spodna horizontalna linia napravo
+                 g2D.drawLine(thirdX+Xdiff,hordownY,fifthX, hordownY);
+                 
+                 // horna horizontalna lina napravo
+                 g2D.drawLine(fifthX,horupY,fifthX-firstX, horupY);
+                  g2D.drawLine(fifthX-firstX-secX,horupY,thirdX+Xdiff, horupY); 
+                 
+                 // spodna vertikalna linia nalavo
+                 g2D.drawLine(thirdX,hordownY,thirdX,hordownY+secY);
+                 g2D.drawLine(thirdX,hordownY+secY+thirdY,thirdX,downY);
+                 // spodna vertikalna linia napravo
+                 g2D.drawLine(thirdX+Xdiff,hordownY,thirdX+Xdiff, downY);
+                 // horna vertikalna linia nalavo
+                 g2D.drawLine(thirdX,horupY,thirdX,0);
+                  
+                  // horna vertikalna linia napravo
+                  g2D.drawLine(thirdX+Xdiff,horupY,thirdX+Xdiff, horupY-secY);
+                  g2D.drawLine(thirdX+Xdiff,horupY-secY-thirdY,thirdX+Xdiff,0);
+                  
+                   
+                   
+                  
                  
              /*       spectral_color((double) SB3);
                     g.setColor(Color.black);
