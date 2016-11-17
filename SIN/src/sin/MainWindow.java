@@ -183,7 +183,7 @@ public class MainWindow{
              
             
 	    paint = new PaintPanel();
-	    paint.setBackground(Color.LIGHT_GRAY);
+	    paint.setBackground(Color.DARK_GRAY);
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.ipady = 750;      //make this component tall
 	    c.weightx = 0.0;
