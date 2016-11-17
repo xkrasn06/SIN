@@ -19,7 +19,7 @@ public class PaintPanel extends JPanel {
         static final int x = 705;
         static final int y = 405;
         // Y suradnice cesty zlava
-        static final int vertWidth = 100;
+        static final int vertWidth = 150;
         static final int vertDiff = 50;
         
         static final int hordownY = 400;
@@ -40,10 +40,10 @@ public class PaintPanel extends JPanel {
         static final int secX = 350;
         
         //X suradnica krizovatka
-        static final int thirdX = 625;
+        static final int thirdX = 605;
         
         // sirka krizovatky
-        static final int Xdiff = 150;
+        static final int Xdiff = 200;
         
         // pravy okraj
         static final int fifthX = 1400;
@@ -102,9 +102,51 @@ public class PaintPanel extends JPanel {
                  g2D.drawLine(fifthX-firstX,horupY,fifthX-firstX-diffX, horupY-vertDiff); 
                  g2D.drawLine(fifthX-firstX-diffX,horupY-vertDiff,fifthX-firstX-secX+vertDiff, horupY-vertDiff);
                  g2D.drawLine(fifthX-firstX-secX+vertDiff,horupY-vertDiff,thirdX+Xdiff, horupY-secY-thirdY);  
-                 g2D.drawLine(thirdX+Xdiff,horupY-secY,fifthX-firstX-secX,horupY);  
-                  
+                 g2D.drawLine(thirdX+Xdiff,horupY-secY,fifthX-firstX-secX,horupY);
                  
+                 g.setColor(Color.white);
+                 float dash1[] = {10.0f};
+                 g2D.setStroke(new BasicStroke(3.0f,
+                        BasicStroke.CAP_BUTT,
+                        BasicStroke.JOIN_MITER,
+                        10.0f, dash1, 0.0f));
+                 // ciary nalavo
+                 g2D.drawLine(firstX,hordownY,firstX+secX, hordownY);
+                 g2D.drawLine(startX,hordownY-vertDiff,firstX+secX, hordownY-vertDiff);
+                 g2D.setStroke(new BasicStroke(3));
+                 g2D.drawLine(startX,hordownY-vertDiff*2,firstX+secX, hordownY-vertDiff*2);
+                 g2D.drawLine(firstX+secX,hordownY-2,firstX+secX, hordownY-vertDiff*2);
+                 
+                 // ciary napravo
+                 g2D.setStroke(new BasicStroke(3.0f,
+                        BasicStroke.CAP_BUTT,
+                        BasicStroke.JOIN_MITER,
+                        10.0f, dash1, 0.0f));
+                 g2D.drawLine(fifthX-firstX,horupY,fifthX-firstX-secX, horupY);
+                 g2D.drawLine(fifthX,horupY+vertDiff,fifthX-firstX-secX, horupY+vertDiff);
+                 g2D.setStroke(new BasicStroke(3));
+                 g2D.drawLine(fifthX,horupY+vertDiff*2,fifthX-firstX-secX, horupY+vertDiff*2);
+                 g2D.drawLine(fifthX-firstX-secX,horupY+2,fifthX-firstX-secX, horupY+vertDiff*2);
+                 
+                 g2D.setStroke(new BasicStroke(3.0f,
+                        BasicStroke.CAP_BUTT,
+                        BasicStroke.JOIN_MITER,
+                        10.0f, dash1, 0.0f));
+                 g2D.drawLine(thirdX+Xdiff-vertDiff,hordownY+vertDiff,thirdX+Xdiff-vertDiff, downY);
+                 g2D.drawLine(thirdX+Xdiff-vertDiff*2,hordownY+vertDiff,thirdX+Xdiff-vertDiff*2, downY);
+                 g2D.setStroke(new BasicStroke(3));
+                 g2D.drawLine(thirdX+Xdiff-vertDiff*3,hordownY+vertDiff,thirdX+Xdiff-vertDiff*3, downY);
+                 g2D.drawLine(thirdX+Xdiff-vertDiff*3,hordownY+vertDiff,thirdX+Xdiff, hordownY+vertDiff);
+                 
+                 g2D.setStroke(new BasicStroke(3.0f,
+                        BasicStroke.CAP_BUTT,
+                        BasicStroke.JOIN_MITER,
+                        10.0f, dash1, 0.0f));
+                g2D.drawLine(thirdX+vertDiff,horupY-vertDiff,thirdX+vertDiff,0);
+                g2D.drawLine(thirdX+vertDiff*2,horupY-+vertDiff,thirdX+vertDiff*2,0);
+                g2D.setStroke(new BasicStroke(3));
+                g2D.drawLine(thirdX+vertDiff*3,horupY-vertDiff,thirdX+vertDiff*3,0);
+                g2D.drawLine(thirdX+vertDiff*3,horupY-vertDiff,thirdX,horupY-vertDiff);
              /*       spectral_color((double) SB3);
                     g.setColor(Color.black);
              
