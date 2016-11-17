@@ -20,6 +20,7 @@ public class PaintPanel extends JPanel {
         static final int y = 405;
         // Y suradnice cesty zlava
         static final int vertWidth = 100;
+        static final int vertDiff = 50;
         
         static final int hordownY = 400;
         static final int horupY = hordownY - vertWidth;
@@ -31,7 +32,7 @@ public class PaintPanel extends JPanel {
         
         // X suradnica laveho okraja
         static final int startX = 0;
-        
+        static final int diffX = 100;
         // X suradnica prve prerusenie
         static final int firstX = 200;
         
@@ -77,7 +78,7 @@ public class PaintPanel extends JPanel {
                  
                  // horna horizontalna lina napravo
                  g2D.drawLine(fifthX,horupY,fifthX-firstX, horupY);
-                  g2D.drawLine(fifthX-firstX-secX,horupY,thirdX+Xdiff, horupY); 
+                 g2D.drawLine(fifthX-firstX-secX,horupY,thirdX+Xdiff, horupY); 
                  
                  // spodna vertikalna linia nalavo
                  g2D.drawLine(thirdX,hordownY,thirdX,hordownY+secY);
@@ -87,12 +88,21 @@ public class PaintPanel extends JPanel {
                  // horna vertikalna linia nalavo
                  g2D.drawLine(thirdX,horupY,thirdX,0);
                   
-                  // horna vertikalna linia napravo
-                  g2D.drawLine(thirdX+Xdiff,horupY,thirdX+Xdiff, horupY-secY);
-                  g2D.drawLine(thirdX+Xdiff,horupY-secY-thirdY,thirdX+Xdiff,0);
+                 // horna vertikalna linia napravo
+                 g2D.drawLine(thirdX+Xdiff,horupY,thirdX+Xdiff, horupY-secY);
+                 g2D.drawLine(thirdX+Xdiff,horupY-secY-thirdY,thirdX+Xdiff,0);
                   
+                 // odbocovak zapad-juh
+                 g2D.drawLine(firstX,hordownY,firstX+diffX, hordownY+vertDiff);
+                 g2D.drawLine(firstX+diffX,hordownY+vertDiff,firstX+secX-vertDiff, hordownY+vertDiff);
+                 g2D.drawLine(firstX+secX-vertDiff,hordownY+vertDiff,thirdX, hordownY+secY+thirdY);
+                 g2D.drawLine(firstX+secX,hordownY,thirdX, hordownY+secY);
                    
-                   
+                 // odbocovak vychod-sever
+                 g2D.drawLine(fifthX-firstX,horupY,fifthX-firstX-diffX, horupY-vertDiff); 
+                 g2D.drawLine(fifthX-firstX-diffX,horupY-vertDiff,fifthX-firstX-secX+vertDiff, horupY-vertDiff);
+                 g2D.drawLine(fifthX-firstX-secX+vertDiff,horupY-vertDiff,thirdX+Xdiff, horupY-secY-thirdY);  
+                 g2D.drawLine(thirdX+Xdiff,horupY-secY,fifthX-firstX-secX,horupY);  
                   
                  
              /*       spectral_color((double) SB3);
