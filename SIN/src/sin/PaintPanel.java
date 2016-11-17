@@ -8,7 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
 import static java.lang.Math.PI;
 import java.util.Random;
-
+import java.awt.geom.AffineTransform;
+import static java.awt.geom.AffineTransform.*;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -56,10 +57,26 @@ public class PaintPanel extends JPanel {
         double green= 0.0;
         double blue = 0.0;
         boolean SKY = true;
-        
+        private final int ARR_SIZE = 6;
         public boolean getSKY() {
             return SKY;
         }
+        void drawArrow(Graphics g1, int x1, int y1, int x2, int y2) {
+                Graphics2D g = (Graphics2D) g1.create();
+
+                double dx = x2 - x1, dy = y2 - y1;
+                double angle = Math.atan2(dy, dx);
+                int len = (int) Math.sqrt(dx*dx + dy*dy);
+                AffineTransform at = AffineTransform.getTranslateInstance(x1, y1);
+                at.concatenate(AffineTransform.getRotateInstance(angle));
+                g.transform(at);
+
+                // Draw horizontal arrow starting in (0, 0)
+                g.drawLine(0, 0, len, 0);
+                g.fillPolygon(new int[] {len, len-ARR_SIZE, len-ARR_SIZE, len},
+                              new int[] {0, -ARR_SIZE, ARR_SIZE, 0}, 4);
+            }
+        
         @Override
 	public void paintComponent(Graphics g){
                 Graphics2D g2D = (Graphics2D) g;
@@ -128,6 +145,7 @@ public class PaintPanel extends JPanel {
                  g2D.drawLine(fifthX,horupY+vertDiff*2,fifthX-firstX-secX, horupY+vertDiff*2);
                  g2D.drawLine(fifthX-firstX-secX,horupY+2,fifthX-firstX-secX, horupY+vertDiff*2);
                  
+                 //ciary dole
                  g2D.setStroke(new BasicStroke(3.0f,
                         BasicStroke.CAP_BUTT,
                         BasicStroke.JOIN_MITER,
@@ -138,6 +156,7 @@ public class PaintPanel extends JPanel {
                  g2D.drawLine(thirdX+Xdiff-vertDiff*3,hordownY+vertDiff,thirdX+Xdiff-vertDiff*3, downY);
                  g2D.drawLine(thirdX+Xdiff-vertDiff*3,hordownY+vertDiff,thirdX+Xdiff, hordownY+vertDiff);
                  
+                 // ciary hore
                  g2D.setStroke(new BasicStroke(3.0f,
                         BasicStroke.CAP_BUTT,
                         BasicStroke.JOIN_MITER,
@@ -147,6 +166,45 @@ public class PaintPanel extends JPanel {
                 g2D.setStroke(new BasicStroke(3));
                 g2D.drawLine(thirdX+vertDiff*3,horupY-vertDiff,thirdX+vertDiff*3,0);
                 g2D.drawLine(thirdX+vertDiff*3,horupY-vertDiff,thirdX,horupY-vertDiff);
+                
+                // sipky nalavo
+                drawArrow(g, startX+10, hordownY-vertDiff/2, firstX-vertDiff*3, hordownY-vertDiff/2);
+                drawArrow(g, startX+10, hordownY-vertDiff/2, firstX-vertDiff*3, hordownY-vertDiff/5);
+                
+                drawArrow(g, firstX-vertDiff, hordownY-vertDiff/2, firstX, hordownY-vertDiff/2);
+                drawArrow(g, firstX-vertDiff, hordownY-vertDiff/2, firstX, hordownY-vertDiff/5);
+                
+                drawArrow(g, firstX+vertDiff*2, hordownY-vertDiff/2, firstX+vertDiff*3, hordownY-vertDiff/2);
+                drawArrow(g, firstX+vertDiff*5, hordownY-vertDiff/2, firstX+vertDiff*6, hordownY-vertDiff/2);
+                
+                drawArrow(g, firstX+vertDiff*2, hordownY+vertDiff/2, firstX+vertDiff*3, hordownY+vertDiff-10);
+                drawArrow(g, firstX+vertDiff*4, hordownY+vertDiff/2, firstX+vertDiff*5, hordownY+vertDiff-10);
+                drawArrow(g, firstX+vertDiff*6, hordownY+vertDiff/2, firstX+vertDiff*7, hordownY+vertDiff);
+                
+                drawArrow(g, firstX+vertDiff*3, hordownY-vertDiff-vertDiff/2, firstX+vertDiff*4, hordownY-vertDiff-vertDiff+10);
+                drawArrow(g, firstX+vertDiff*5, hordownY-vertDiff-vertDiff/2, firstX+vertDiff*6, hordownY-vertDiff-vertDiff+10);
+                
+                // sipky napravo
+                drawArrow(g, fifthX-10,horupY+vertDiff/2,fifthX-vertDiff*2, horupY+vertDiff/2);
+                drawArrow(g, fifthX-10,horupY+vertDiff/2,fifthX-vertDiff*2, horupY+vertDiff/5);
+                
+                drawArrow(g, fifthX-firstX,horupY+vertDiff/2,fifthX-firstX-vertDiff*2, horupY+vertDiff/2);
+                drawArrow(g, fifthX-firstX,horupY+vertDiff/2,fifthX-firstX-vertDiff*2, horupY+vertDiff/5);
+                
+                drawArrow(g, fifthX-firstX-vertDiff*4,horupY+vertDiff/2,fifthX-firstX-vertDiff*5, horupY+vertDiff/2);
+                drawArrow(g, fifthX-firstX-vertDiff*4,horupY-vertDiff/2,fifthX-firstX-vertDiff*5, horupY-vertDiff+10);
+                
+                drawArrow(g, fifthX-firstX-vertDiff*4,horupY+vertDiff/2+vertDiff,fifthX-firstX-vertDiff*5, horupY+vertDiff/2+vertDiff+10);
+               // sipky dole 
+               drawArrow(g,thirdX+Xdiff-vertDiff/2,hordownY+vertDiff*3,thirdX+Xdiff-vertDiff/5, hordownY+vertDiff+10);
+               drawArrow(g,thirdX+Xdiff-vertDiff/2-vertDiff,hordownY+vertDiff*3,thirdX+Xdiff-vertDiff/2-vertDiff, hordownY+vertDiff+10);
+               drawArrow(g,thirdX+Xdiff-vertDiff/2-vertDiff*2,hordownY+vertDiff*3,thirdX+Xdiff-vertDiff/2-vertDiff*2-20, hordownY+vertDiff+10);
+               
+               // sipky hore
+               drawArrow(g,thirdX+vertDiff/2,horupY-vertDiff*3,thirdX+vertDiff/2-15,horupY-vertDiff-10);
+               drawArrow(g,thirdX+vertDiff/2+vertDiff,horupY-vertDiff*3,thirdX+vertDiff/2+vertDiff,horupY-vertDiff-10);
+               drawArrow(g,thirdX+vertDiff/2+vertDiff*2,horupY-vertDiff*3,thirdX+vertDiff/2+vertDiff*2+15,horupY-vertDiff-10);
+                
              /*       spectral_color((double) SB3);
                     g.setColor(Color.black);
              
