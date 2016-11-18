@@ -205,6 +205,7 @@ public class PaintPanel extends JPanel {
                drawArrow(g,thirdX+vertDiff/2+vertDiff,horupY-vertDiff*3,thirdX+vertDiff/2+vertDiff,horupY-vertDiff-10);
                drawArrow(g,thirdX+vertDiff/2+vertDiff*2,horupY-vertDiff*3,thirdX+vertDiff/2+vertDiff*2+15,horupY-vertDiff-10);
                 
+               g2D.fillOval(firstX+secX+vertDiff/2, hordownY-vertDiff/2-10, 15,15 );
              /*       spectral_color((double) SB3);
                     g.setColor(Color.black);
              
