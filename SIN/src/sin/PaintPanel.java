@@ -84,7 +84,12 @@ public class PaintPanel extends JPanel {
             Graphics2D g2D = (Graphics2D) g;
           //  super.paintComponent(g);
             g2D.setColor(Color.GREEN);
-            g2D.fillRect(posX, posY, 15, 10);
+             for (int i = 0; i < MainAgent.AgentList.size(); i++) {
+                 int x = MainAgent.AgentList.get(i).x;
+                 int y = MainAgent.AgentList.get(i).y;
+                  g2D.fillRect(x, y, 15, 10);
+             }
+            //g2D.fillRect(posX, posY, 15, 10);
              System.out.println("PaintVehicle");
             
         }

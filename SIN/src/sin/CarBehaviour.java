@@ -16,7 +16,7 @@ public class CarBehaviour extends Behaviour {
     private static PaintPanel Panel;
     private int posX;
     private int posY;
-     public CarBehaviour(PaintPanel p, int x, int y) {
+    public CarBehaviour(PaintPanel p, int x, int y) {
        this.Panel = p; 
        this.posX = x;
        this.posY = y;

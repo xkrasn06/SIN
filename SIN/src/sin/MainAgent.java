@@ -14,6 +14,7 @@ import jade.wrapper.StaleProxyException;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.lang.acl.ACLMessage;
+import java.util.ArrayList;
 
 /**
  * @author Milan
@@ -22,9 +23,22 @@ public class MainAgent extends Agent{
         public static PaintPanel paint;
         private static int vehicleAgents = 0;
         private jade.wrapper.AgentContainer carAgentContainer;
-    
+        public static class AgentListElement{
+            public int  x;
+            public int y;
+            public String name;
+            
+            public AgentListElement(int x, int y, String name) {
+                this.x=x;
+                this.y=y;
+                this.name=name;
+            }
+        }
+        public static ArrayList<AgentListElement> AgentList = new ArrayList<AgentListElement>(); 
     protected void setup() {
             System.out.println("MainAgent "+ getAID().getName()+ " has started");
+            String s= getAID().getName();
+            System.out.println(s);
             Profile p = new ProfileImpl();
             Runtime rt = Runtime.instance();
             carAgentContainer =  rt.createAgentContainer(p);
@@ -47,7 +61,7 @@ public class MainAgent extends Agent{
     
     public static void setPanel(PaintPanel p) {
         paint = p;
-        paint.updateVehicles(20,30);
+        //paint.updateVehicles(20,30);
     }
     
     public void createNewVehicle(final String endpointFromName, final String endpointToName) {
