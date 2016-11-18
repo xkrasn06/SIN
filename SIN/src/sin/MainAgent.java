@@ -22,19 +22,19 @@ public class MainAgent extends Agent{
         public static PaintPanel paint;
         private static int vehicleAgents = 0;
         private jade.wrapper.AgentContainer carAgentContainer;
+    
     protected void setup() {
-        System.out.println("MainAgent "+ getAID().getName()+ " has started");
-        Profile p = new ProfileImpl();
-        Runtime rt = Runtime.instance();
-        carAgentContainer =  rt.createAgentContainer(p);
-        String myStrings[];
-        myStrings = new String[] { "One", "Two", "Three" };
-        MainWindow.main(myStrings);
-        final String from = "West";
-        final String to = "East";
+            System.out.println("MainAgent "+ getAID().getName()+ " has started");
+            Profile p = new ProfileImpl();
+            Runtime rt = Runtime.instance();
+            carAgentContainer =  rt.createAgentContainer(p);
+           
+            MainWindow.main();
+            final String from = "West";
+            final String to = "East";
         
-        createNewVehicle(from,to);
-       
+            createNewVehicle(from,to);
+            createNewVehicle(to,from);
         
             
         
@@ -51,24 +51,21 @@ public class MainAgent extends Agent{
     }
     
     public void createNewVehicle(final String endpointFromName, final String endpointToName) {
-		addBehaviour(new OneShotBehaviour() {
+	addBehaviour(new OneShotBehaviour() {
 
-			@Override
-			public void action() {
-				Object args[] = { endpointFromName, endpointToName};
+            @Override
+            public void action() {
+                    Object args[] = { endpointFromName, endpointToName};
+                    try {   
+                        AgentController agent = carAgentContainer.createNewAgent("car-" + vehicleAgents, VehicleAgent.class.getCanonicalName(), args);
+                        agent.start();
+                        vehicleAgents++;
+                    } catch (StaleProxyException e) {
+                        System.err.println("Error creating car agents");
+                        e.printStackTrace();
+                    }
+            }
 
-				// spawn
-				try {   
-                                       
-                                        AgentController agent = carAgentContainer.createNewAgent("car-" + vehicleAgents, VehicleAgent.class.getCanonicalName(), args);
-					agent.start();
-					vehicleAgents++;
-				} catch (StaleProxyException e) {
-					System.err.println("Error creating car agents");
-					e.printStackTrace();
-				}
-			}
-
-		});
-}
+        });
+    }
 }

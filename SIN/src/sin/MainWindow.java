@@ -248,14 +248,13 @@ public class MainWindow{
      *
      * @param args
      */
-    public static void main(String[] args){
+    public static void main(){
 		 javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	            public void run() {
 	                createAndShowGUI();
 	            }
 	        });
-                 for (String s : args)
-            System.out.println("arg -> " + s);
+                 
                  
                  
 	    }
