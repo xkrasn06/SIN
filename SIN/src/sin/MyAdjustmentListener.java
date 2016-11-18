@@ -13,7 +13,7 @@ import java.awt.event.AdjustmentListener;
  * @author Milan
  */
 public class MyAdjustmentListener implements AdjustmentListener {
-    private final PaintPanel Panel;
+    private static PaintPanel Panel;
     public MyAdjustmentListener(PaintPanel p) {
        this.Panel = p; 
     }

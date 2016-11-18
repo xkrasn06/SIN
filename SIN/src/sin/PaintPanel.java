@@ -58,6 +58,10 @@ public class PaintPanel extends JPanel {
         double blue = 0.0;
         boolean SKY = true;
         private final int ARR_SIZE = 6;
+        private Graphics g;
+        private boolean paintBackground = true;
+        private int posX = 0;
+        private int posY = 0;
         public boolean getSKY() {
             return SKY;
         }
@@ -76,11 +80,22 @@ public class PaintPanel extends JPanel {
                 g.fillPolygon(new int[] {len, len-ARR_SIZE, len-ARR_SIZE, len},
                               new int[] {0, -ARR_SIZE, ARR_SIZE, 0}, 4);
             }
+        public void paintVehicle(Graphics g) {
+            Graphics2D g2D = (Graphics2D) g;
+          //  super.paintComponent(g);
+            g2D.setColor(Color.GREEN);
+            g2D.fillRect(posX, posY, 15, 10);
+             System.out.println("PaintVehicle");
+            
+        }
+        
         
         @Override
 	public void paintComponent(Graphics g){
                 Graphics2D g2D = (Graphics2D) g;
+                this.g = g;
                 super.paintComponent(g);
+              //  if (paintBackground) {
                 g.setColor(Color.black);
                  g2D.setStroke(new BasicStroke(5));
                  
@@ -204,8 +219,11 @@ public class PaintPanel extends JPanel {
                drawArrow(g,thirdX+vertDiff/2,horupY-vertDiff*3,thirdX+vertDiff/2-15,horupY-vertDiff-10);
                drawArrow(g,thirdX+vertDiff/2+vertDiff,horupY-vertDiff*3,thirdX+vertDiff/2+vertDiff,horupY-vertDiff-10);
                drawArrow(g,thirdX+vertDiff/2+vertDiff*2,horupY-vertDiff*3,thirdX+vertDiff/2+vertDiff*2+15,horupY-vertDiff-10);
-                
+             //  this.paintBackground = false;
+             //  } 
                g2D.fillOval(firstX+secX+vertDiff/2, hordownY-vertDiff/2-10, 15,15 );
+               paintVehicle(g);
+              // this.paintBackground =true;
              /*       spectral_color((double) SB3);
                     g.setColor(Color.black);
              
@@ -274,18 +292,18 @@ public class PaintPanel extends JPanel {
                     g.fillOval(x, y, 30, 30);
                */  
 	}
+        public void updateVehicles(int x, int y) {
+            this.posX = x;
+            this.posY = y;
+            System.out.format("Vehicle Pos%n" + x,y);
+            repaint();
+        }
 	
         public void updateValues() {
-            this.SB3 = MainWindow.getSB3(); // wavelength
-            this.SB2 = MainWindow.getSB2(); //
-            this.SB1 = MainWindow.getSB1(); //
-            N = SB2; // N
+          
           //  MainWindow.setMax(SB3/10);
            // System.out.format("The value of con is: %d%n", N);
-            double size =this.SB1/1000.0; // a
-            System.out.format("The value of size is: %d%n", this.SB1);
-            double particle = Math.pow(size,6);
-            double nom = (Math.pow(40,4))*282;
+         
            
            
            /* double con = 8*Math.pow(PI,4)*SB1*1; //0.00000000751;
@@ -302,31 +320,13 @@ public class PaintPanel extends JPanel {
             timer.start();*/
            // for (int i =700; i>=400; i-=50) {
             //    SB3 = i;
-            length = nom*particle / Math.pow(SB3/10,4);
-            length *=1000;
-            System.out.format("Length: %g%n", length);
-            dx = (int) length;
-            dy = (int) length;
-            repaint();
+          
+           // repaint();
+          
          //   }
         }
      // http://stackoverflow.com/questions/3407942/rgb-values-of-visible-spectrum/22681410#22681410   
      
-        public  void spectral_color(double l) // RGB <0,1> <- lambda l <400,700> [nm]
-    { 
-         if (l==400) l = 410;
-         if (l==700) l = 690;
-        double t;  red=0.0; green=0.0; blue=0.0;
-         if ((l>=400.0)&&(l<410.0)) { t=(l-400.0)/(410.0-400.0); red=    +(0.33*t)-(0.20*t*t); }
-    else if ((l>=410.0)&&(l<475.0)) { t=(l-410.0)/(475.0-410.0); red=0.14         -(0.13*t*t); }
-    else if ((l>=545.0)&&(l<595.0)) { t=(l-545.0)/(595.0-545.0); red=    +(1.98*t)-(     t*t); }
-    else if ((l>=595.0)&&(l<650.0)) { t=(l-595.0)/(650.0-595.0); red=0.98+(0.06*t)-(0.40*t*t); }
-    else if ((l>=650.0)&&(l<700.0)) { t=(l-650.0)/(700.0-650.0); red=0.65-(0.84*t)+(0.20*t*t); }
-         if ((l>=415.0)&&(l<475.0)) { t=(l-415.0)/(475.0-415.0); green=             +(0.80*t*t); }
-    else if ((l>=475.0)&&(l<590.0)) { t=(l-475.0)/(590.0-475.0); green=0.8 +(0.76*t)-(0.80*t*t); }
-    else if ((l>=585.0)&&(l<639.0)) { t=(l-585.0)/(639.0-585.0); green=0.84-(0.84*t)           ; }
-         if ((l>=400.0)&&(l<475.0)) { t=(l-400.0)/(475.0-400.0); blue=    +(2.20*t)-(1.50*t*t); }
-    else if ((l>=475.0)&&(l<560.0)) { t=(l-475.0)/(560.0-475.0); blue=0.7 -(     t)+(0.30*t*t); }
-    }
+       
 }
 

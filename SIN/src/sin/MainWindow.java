@@ -42,7 +42,7 @@ public class MainWindow{
 	private static JScrollBar sb2;
 	private static JScrollBar sb3;
         private static JScrollBar sb4;
-	private static PaintPanel paint;
+	public static PaintPanel paint;
         private static int maxSize = 40;
         private static BoundedRangeModel model1;
         private static JCheckBox box1;
@@ -190,6 +190,7 @@ public class MainWindow{
              
             
 	    paint = new PaintPanel();
+            MainAgent.setPanel(paint);
 	    paint.setBackground(Color.DARK_GRAY);
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.ipady = 750;      //make this component tall
