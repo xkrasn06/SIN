@@ -1,6 +1,11 @@
 package sin;
 
 import static com.sun.management.jmx.Trace.isSelected;
+import jade.core.Profile;
+import jade.core.ProfileImpl;
+import jade.wrapper.AgentController;
+import jade.wrapper.ContainerController;
+import jade.wrapper.StaleProxyException;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
@@ -10,6 +15,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.BoundedRangeModel;
 import javax.swing.JButton;
@@ -236,15 +243,20 @@ public class MainWindow{
         frame.setVisible(true);
     }
     
-    
-    
-   
-	public static void main(String[] args) {
+    /**
+     *
+     * @param args
+     */
+    public static void main(String[] args){
 		 javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	            public void run() {
 	                createAndShowGUI();
 	            }
 	        });
+                 for (String s : args)
+            System.out.println("arg -> " + s);
+                 
+                 
 	    }
 
     public MainWindow() {
