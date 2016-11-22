@@ -20,34 +20,35 @@ public class PaintPanel extends JPanel {
         static final int x = 705;
         static final int y = 405;
         // Y suradnice cesty zlava
-        static final int vertWidth = 150;
-        static final int vertDiff = 50;
+        public static final int vertWidth = 150;
+        public static final int vertDiff = 50;
         
-        static final int hordownY = 400;
-        static final int horupY = hordownY - vertWidth;
+        public static final int hordownY = 400;
+        public static final int horupY = hordownY - vertWidth;
         
         // Y suradnica spodneho okraja
-        static final int downY = 800;
-        static final int secY = 50;
-        static final int thirdY = 100;
+        public static final int downY = 800;
+        public static final int secY = 50;
+        public static final int thirdY = 100;
         
         // X suradnica laveho okraja
-        static final int startX = 0;
-        static final int diffX = 100;
+        public static final int startX = 0;
+        public static final int diffX = 100;
         // X suradnica prve prerusenie
-        static final int firstX = 200;
-        
+        public static final int firstX = 200;
+         
         // X suradnica druhe prerusenie (zaciatok)
-        static final int secX = 350;
+        public static final int secX = 350;
         
         //X suradnica krizovatka
-        static final int thirdX = 605;
+        public static final int thirdX = 605;
         
         // sirka krizovatky
-        static final int Xdiff = 200;
+        public static final int Xdiff = 200;
         
         // pravy okraj
-        static final int fifthX = 1400;
+        public static final int fifthX = 1400;
+        
         int N = 4;
         double length = 30;
         int dx = (int) length;
@@ -87,7 +88,7 @@ public class PaintPanel extends JPanel {
              for (int i = 0; i < MainAgent.AgentList.size(); i++) {
                  int x = MainAgent.AgentList.get(i).x;
                  int y = MainAgent.AgentList.get(i).y;
-                  g2D.fillRect(x, y, 15, 10);
+                  g2D.fillRect(x, y, 40, 27);
              }
             //g2D.fillRect(posX, posY, 15, 10);
              System.out.println("PaintVehicle");

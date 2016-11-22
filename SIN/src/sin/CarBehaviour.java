@@ -18,32 +18,47 @@ import java.util.logging.Logger;
  */
 public class CarBehaviour extends CyclicBehaviour {
     private static PaintPanel Panel;
-    private int posX;
-    private int posY;
+    private int from;
+    private int to;
     private final String name;
+    private boolean stopped = false;
   
-    public CarBehaviour(String name) {
+    public CarBehaviour(String name, int from, int to) {
        this.name = name;
+       this.from = from;
+       this.to = to;
        
     }
     @Override
     public void action() {
        // Panel.updateVehicles(this.posX,this.posY);
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(CarBehaviour.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //posX+=5;
-        for (int i = 0; i < MainAgent.AgentList.size(); i++) {
-             
-            if(MainAgent.AgentList.get(i).name.equals(name)) {
-                
-                MainAgent.AgentList.get(i).x+=5;
-                break;
+       if(from==MainAgent.WEST && to==MainAgent.EAST) {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(CarBehaviour.class.getName()).log(Level.SEVERE, null, ex);
             }
-	}
-        MainAgent.paint.repaint();
+            for (int i = 0; i < MainAgent.AgentList.size(); i++) {
+             
+                if(MainAgent.AgentList.get(i).name.equals(name)) {
+                    // pozicia zastavenia ciara krizovatky plus pocet aut
+                    int newPos=MainAgent.AgentList.get(i).x+Crossroads.getWestToEastCars()*80+80;
+                    if ((newPos > MainAgent.WESTLINE) && (Crossroads.getWestToEast())  == 0) {
+                        Crossroads.WestToEastCarsInc();
+                        stopped = true;
+                        break;
+                    }
+                    else {
+                        
+                        MainAgent.AgentList.get(i).x+=40;
+                        if (stopped) 
+                            Crossroads.WestToEastCarsDec();
+                    }
+                    break;
+                }
+            }
+       }
+       MainAgent.paint.repaint();
        
         
     }

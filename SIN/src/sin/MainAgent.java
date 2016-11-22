@@ -15,6 +15,11 @@ import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.lang.acl.ACLMessage;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static sin.PaintPanel.firstX;
+import static sin.PaintPanel.secX;
 
 /**
  * @author Milan
@@ -27,6 +32,8 @@ public class MainAgent extends Agent{
         public static final int NORTH = 1;
         public static final int EAST = 2;
         public static final int SOUTH = 3;
+        
+        public static final int WESTLINE = firstX+secX;
         public static class AgentListElement{
             public int  x;
             public int y;
@@ -55,6 +62,10 @@ public class MainAgent extends Agent{
             final int to = this.EAST;
         
             createNewVehicle(from,to);
+            
+            
+           
+            
             createNewVehicle(to,from);
         
             
@@ -69,6 +80,10 @@ public class MainAgent extends Agent{
     public static void setPanel(PaintPanel p) {
         paint = p;
         //paint.updateVehicles(20,30);
+    }
+    
+    public void createVeh() {
+        createNewVehicle(MainAgent.WEST, MainAgent.EAST);
     }
     
     public void createNewVehicle(final int endpointFromName, final int endpointToName) {

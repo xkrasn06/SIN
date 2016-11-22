@@ -32,7 +32,7 @@ public class VehicleAgent extends Agent {
                 y = 420;
          } else if (from==MainAgent.WEST) {
               x = 20;
-              y = 420;
+              y = 365;
          } else if (from==MainAgent.NORTH) {
               x = 700;
               y = 20;
@@ -45,7 +45,7 @@ public class VehicleAgent extends Agent {
          a = new MainAgent.AgentListElement(x,y,type,s);
          MainAgent.AgentList.add(a);
          
-         addBehaviour(new CarBehaviour(s));
+         addBehaviour(new CarBehaviour(s, from, to));
          
           
     }
