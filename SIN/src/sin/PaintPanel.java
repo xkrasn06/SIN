@@ -305,7 +305,7 @@ public class PaintPanel extends JPanel {
         }
 	
         public void updateValues() {
-          
+          repaint();
           //  MainWindow.setMax(SB3/10);
            // System.out.format("The value of con is: %d%n", N);
          

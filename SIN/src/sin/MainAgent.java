@@ -23,14 +23,21 @@ public class MainAgent extends Agent{
         public static PaintPanel paint;
         private static int vehicleAgents = 0;
         private jade.wrapper.AgentContainer carAgentContainer;
+        public static final int WEST = 0;
+        public static final int NORTH = 1;
+        public static final int EAST = 2;
+        public static final int SOUTH = 3;
         public static class AgentListElement{
             public int  x;
             public int y;
+            public int type;
             public String name;
             
-            public AgentListElement(int x, int y, String name) {
+            
+            public AgentListElement(int x, int y, int type, String name) {
                 this.x=x;
                 this.y=y;
+                this.type=type;
                 this.name=name;
             }
         }
@@ -44,8 +51,8 @@ public class MainAgent extends Agent{
             carAgentContainer =  rt.createAgentContainer(p);
            
             MainWindow.main();
-            final String from = "West";
-            final String to = "East";
+            final int from = this.WEST;
+            final int to = this.EAST;
         
             createNewVehicle(from,to);
             createNewVehicle(to,from);
@@ -64,12 +71,13 @@ public class MainAgent extends Agent{
         //paint.updateVehicles(20,30);
     }
     
-    public void createNewVehicle(final String endpointFromName, final String endpointToName) {
+    public void createNewVehicle(final int endpointFromName, final int endpointToName) {
 	addBehaviour(new OneShotBehaviour() {
 
             @Override
             public void action() {
-                    Object args[] = { endpointFromName, endpointToName};
+                    int type = 0;
+                    Object args[] = { endpointFromName, endpointToName, type};
                     try {   
                         AgentController agent = carAgentContainer.createNewAgent("car-" + vehicleAgents, VehicleAgent.class.getCanonicalName(), args);
                         agent.start();

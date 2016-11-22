@@ -12,33 +12,41 @@ import jade.core.Agent;
  * @author Milan
  */
 public class VehicleAgent extends Agent {
+    
+    private int from;
+    private int to;
+    private int type;
+    private String name;
     protected void setup() {
           System.out.println("Vehicle Agent "+ getAID().getName()+ " has started");
           Object[] args = getArguments();
-          String from = (String) args[0];
-          String to = (String) args[1];
+          int from = (int) args[0];
+          int to = (int) args[1];
+          int type = (int) args[2];
           System.out.println("Vehicle Agent path "+ from + to);
           
          System.out.println("True "+ from + to);
          int x =0,y=0;
-         if(from.equals("East")) {      
+         if(from == MainAgent.EAST) {      
                 x = 1080;
                 y = 420;
-         } else if (from.equals("West")) {
+         } else if (from==MainAgent.WEST) {
               x = 20;
               y = 420;
-         } else if (from.equals("North")) {
+         } else if (from==MainAgent.NORTH) {
               x = 700;
               y = 20;
-         } else if (from.equals("South")) {
+         } else if (from==MainAgent.SOUTH) {
               x = 700;
               y = 680;
          }
          String s = getAID().getName();
          MainAgent.AgentListElement a;
-         a = new MainAgent.AgentListElement(x,y,s);
+         a = new MainAgent.AgentListElement(x,y,type,s);
          MainAgent.AgentList.add(a);
-              
+         
+         addBehaviour(new CarBehaviour(s));
+         
           
     }
     
