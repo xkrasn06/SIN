@@ -29,6 +29,7 @@ public class Crossroads extends Agent{
     public static int NORTHtoSOUTH = 0;
     public static int NORTHtoEAST = 0;
     public static int STATE = 1;
+    public static boolean WAIT = true;
     
     private boolean crossroadChanged = false;
     private static int WESTtoEASTcars = 0;
@@ -46,26 +47,33 @@ public class Crossroads extends Agent{
             public void onTick() {
                     System.out.println("TICKd" + Crossroads.STATE);
                     setZero(); 
-                    
+                if (Crossroads.WAIT) {
+                    Crossroads.WAIT = false;
+                    return;
+                }   
                 if (Crossroads.STATE == 0) {
                    
                     Crossroads.WESTtoEAST = Crossroads.WESTtoNORTH = 1;
                     Crossroads.STATE = 1;
+                    Crossroads.WAIT = true;
                 } else
                 if (Crossroads.STATE == 1) {
                    // System.out.println("TICKdfwaeaw");
                     Crossroads.EASTtoWEST = Crossroads.EASTtoSOUTH = 1;
                     Crossroads.STATE = 2;
+                     Crossroads.WAIT = true;
                 } else
                 if (Crossroads.STATE == 2) {
                     //System.out.println("TICKdfwaeaw");
                     Crossroads.SOUTHtoWEST = Crossroads.SOUTHtoNORTH = Crossroads.SOUTHtoEAST = 1;
                     Crossroads.STATE = 3;
+                     Crossroads.WAIT = true;
                 } else
                 if (Crossroads.STATE == 3) {
                     //System.out.println("TICKdfwaeaw");
                     Crossroads.NORTHtoWEST = Crossroads.NORTHtoSOUTH = Crossroads.NORTHtoEAST = 1;
                     Crossroads.STATE = 0;
+                    Crossroads.WAIT = true;
                 }
                 System.out.println("TICKed" + Crossroads.EASTtoWEST);
                 
