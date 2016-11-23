@@ -24,6 +24,7 @@ public class CarBehaviour extends CyclicBehaviour {
     private int to;
     private final AID name;
     private boolean stopped = false;
+    private boolean passed = false;
   
     public CarBehaviour(AID name, int from, int to) {
        this.name = name;
@@ -55,7 +56,7 @@ public class CarBehaviour extends CyclicBehaviour {
                 if(MainAgent.AgentList.get(i).name.equals(name)) {
                     // pozicia zastavenia ciara krizovatky plus pocet aut
                     int newPos=MainAgent.AgentList.get(i).x+Crossroads.getWestToEastCars()*50;
-                    if ((newPos > MainAgent.WESTLINE) && (Crossroads.getWestToEast())  == 0) {
+                    if ((newPos > MainAgent.WESTLINE) && (Crossroads.getWestToEast() == 0) && (!passed)) {
                         if (!stopped) Crossroads.WestToEastCarsInc();
                         stopped = true;
                         break;
@@ -63,8 +64,10 @@ public class CarBehaviour extends CyclicBehaviour {
                     else {
                         
                         MainAgent.AgentList.get(i).x+=40;
-                        if (stopped) 
+                        if (stopped) { 
+                            passed = true;
                             Crossroads.WestToEastCarsDec();
+                        }
                     }
                     break;
                 }

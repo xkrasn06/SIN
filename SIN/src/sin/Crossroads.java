@@ -38,8 +38,9 @@ public class Crossroads extends Agent{
        }
      
      
-     public static int getWestToEast() {
+     public static int  getWestToEast() {
          return Crossroads.WESTtoEAST;
+             
      }
      
      public static int getWestToEastCars() {
