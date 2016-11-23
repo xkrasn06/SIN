@@ -5,8 +5,10 @@
  */
 package sin;
 
+import jade.core.AID;
 import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.lang.acl.ACLMessage;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +34,17 @@ public class CarBehaviour extends CyclicBehaviour {
     @Override
     public void action() {
        // Panel.updateVehicles(this.posX,this.posY);
+       ACLMessage msg = myAgent.receive();
+        if (msg != null) {
+            String lang = msg.getLanguage();
+            String con = msg.getContent();
+            
+        }
+        else {
+          
+        }
        if(from==MainAgent.WEST && to==MainAgent.EAST) {
+            
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException ex) {
@@ -42,9 +54,9 @@ public class CarBehaviour extends CyclicBehaviour {
              
                 if(MainAgent.AgentList.get(i).name.equals(name)) {
                     // pozicia zastavenia ciara krizovatky plus pocet aut
-                    int newPos=MainAgent.AgentList.get(i).x+Crossroads.getWestToEastCars()*80+80;
+                    int newPos=MainAgent.AgentList.get(i).x+Crossroads.getWestToEastCars()*50;
                     if ((newPos > MainAgent.WESTLINE) && (Crossroads.getWestToEast())  == 0) {
-                        Crossroads.WestToEastCarsInc();
+                        if (!stopped) Crossroads.WestToEastCarsInc();
                         stopped = true;
                         break;
                     }

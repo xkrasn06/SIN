@@ -13,6 +13,7 @@ import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
+import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +34,8 @@ public class MainAgent extends Agent{
         public static final int EAST = 2;
         public static final int SOUTH = 3;
         
-        public static final int WESTLINE = firstX+secX;
+        public static boolean CREATE = false;
+        public static final int WESTLINE = firstX+secX-80;
         public static class AgentListElement{
             public int  x;
             public int y;
@@ -60,10 +62,10 @@ public class MainAgent extends Agent{
             MainWindow.main();
             final int from = this.WEST;
             final int to = this.EAST;
-        
+            createCrossroads();
             createNewVehicle(from,to);
-            
-            
+            createVeh();
+           
            
             
             createNewVehicle(to,from);
@@ -74,7 +76,7 @@ public class MainAgent extends Agent{
     
    
     protected void takeDown() {
-        System.out.println("MainnAgent "+ getAID().getName()+ " has terminated"); 
+        System.out.println("MainAgent "+ getAID().getName()+ " has terminated"); 
     }
     
     public static void setPanel(PaintPanel p) {
@@ -83,7 +85,28 @@ public class MainAgent extends Agent{
     }
     
     public void createVeh() {
-        createNewVehicle(MainAgent.WEST, MainAgent.EAST);
+        addBehaviour(new CyclicBehaviour() {
+
+            @Override
+            public void action() {
+                    if (!MainAgent.CREATE) return;
+                    int type = 0;
+                    int endpointFromName = MainAgent.WEST;
+                    int endpointToName = MainAgent.EAST;
+                    Object args[] = { endpointFromName, endpointToName, type};
+                
+                    try {   
+                        AgentController agent = carAgentContainer.createNewAgent("car-" + vehicleAgents, VehicleAgent.class.getCanonicalName(), args);
+                        agent.start();
+                        vehicleAgents++;
+                    } catch (StaleProxyException e) {
+                        System.err.println("Error creating car agents");
+                        e.printStackTrace();
+                    }
+                    MainAgent.CREATE = false;
+            }
+
+        });
     }
     
     public void createNewVehicle(final int endpointFromName, final int endpointToName) {
@@ -93,12 +116,34 @@ public class MainAgent extends Agent{
             public void action() {
                     int type = 0;
                     Object args[] = { endpointFromName, endpointToName, type};
+                
                     try {   
-                        AgentController agent = carAgentContainer.createNewAgent("car-" + vehicleAgents, VehicleAgent.class.getCanonicalName(), args);
+                        AgentController agent = carAgentContainer.createNewAgent("C-" + vehicleAgents, VehicleAgent.class.getCanonicalName(), args);
                         agent.start();
                         vehicleAgents++;
                     } catch (StaleProxyException e) {
                         System.err.println("Error creating car agents");
+                        e.printStackTrace();
+                    }
+            }
+
+        });
+    }
+    
+    public void createCrossroads() {
+	addBehaviour(new OneShotBehaviour() {
+
+            @Override
+            public void action() {
+                    int type = 0;
+                    Object args[] = {};
+                
+                    try {   
+                        AgentController agent = carAgentContainer.createNewAgent("Crossroad-", Crossroads.class.getCanonicalName(), args);
+                        agent.start();
+                       // vehicleAgents++;
+                    } catch (StaleProxyException e) {
+                        System.err.println("Error creating crossroad agents");
                         e.printStackTrace();
                     }
             }

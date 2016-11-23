@@ -6,6 +6,7 @@
 package sin;
 
 import jade.core.Agent;
+import jade.lang.acl.ACLMessage;
 
 /**
  *
@@ -44,7 +45,7 @@ public class VehicleAgent extends Agent {
          MainAgent.AgentListElement a;
          a = new MainAgent.AgentListElement(x,y,type,s);
          MainAgent.AgentList.add(a);
-         
+         sendWelcomeMessage(from,to);
          addBehaviour(new CarBehaviour(s, from, to));
          
           
@@ -64,5 +65,33 @@ public class VehicleAgent extends Agent {
             }
 	}
         System.out.println("Vehicle Agent "+ getAID().getName()+ " has terminated"); 
+    }
+    
+    private void sendWelcomeMessage(int from, int to) {
+        
+        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        msg.addReceiver(Crossroads.crossroadsAID);
+        String fromS = null, toS = null;
+        if (from == MainAgent.WEST)
+            fromS = "WEST";
+        else if (from == MainAgent.NORTH)
+            fromS = "NORTH";
+        else if (from == MainAgent.EAST)
+            fromS = "EAST";
+        else if (from == MainAgent.SOUTH)
+            fromS = "SOUTH";
+        
+        if (to == MainAgent.WEST)
+            toS = "WEST";
+        else if (to == MainAgent.NORTH)
+            toS = "NORTH";
+        else if (to == MainAgent.EAST)
+            toS = "EAST";
+        else if (to == MainAgent.SOUTH)
+            toS = "SOUTH";
+        
+        msg.setContent(fromS+"to"+toS);
+        
+        send(msg);
     }
 }

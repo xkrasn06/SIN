@@ -91,7 +91,7 @@ public class PaintPanel extends JPanel {
                   g2D.fillRect(x, y, 40, 27);
              }
             //g2D.fillRect(posX, posY, 15, 10);
-             System.out.println("PaintVehicle");
+             //System.out.println("PaintVehicle");
             
         }
         

@@ -219,7 +219,8 @@ public class MainWindow{
          	       System.out.println("listener button");
                        paint.SKY = !paint.SKY;
                        paint.updateValues();
-                       MainAgent.createVeh();
+                       MainAgent.CREATE = true;
+                       //MainAgent.createNewVehicle(0,2);
          	    }
          	});
              
