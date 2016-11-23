@@ -18,8 +18,8 @@ import java.util.logging.Logger;
  * @author Milan
  */
 public class Crossroads extends Agent{
-    public static int WESTtoEAST = 0;
-    public static int WESTtoNORTH = 0;
+    public static int WESTtoEAST = 1;
+    public static int WESTtoNORTH = 1;
     public static int EASTtoWEST = 0;
     public static int EASTtoSOUTH = 0;
     public static int SOUTHtoWEST = 0;
@@ -28,7 +28,7 @@ public class Crossroads extends Agent{
     public static int NORTHtoWEST = 0;
     public static int NORTHtoSOUTH = 0;
     public static int NORTHtoEAST = 0;
-    public static int STATE = 0;
+    public static int STATE = 1;
     
     private boolean crossroadChanged = false;
     private static int WESTtoEASTcars = 0;
@@ -53,8 +53,18 @@ public class Crossroads extends Agent{
                     Crossroads.STATE = 1;
                 } else
                 if (Crossroads.STATE == 1) {
-                    System.out.println("TICKdfwaeaw");
+                   // System.out.println("TICKdfwaeaw");
                     Crossroads.EASTtoWEST = Crossroads.EASTtoSOUTH = 1;
+                    Crossroads.STATE = 2;
+                } else
+                if (Crossroads.STATE == 2) {
+                    //System.out.println("TICKdfwaeaw");
+                    Crossroads.SOUTHtoWEST = Crossroads.SOUTHtoNORTH = Crossroads.SOUTHtoEAST = 1;
+                    Crossroads.STATE = 3;
+                } else
+                if (Crossroads.STATE == 3) {
+                    //System.out.println("TICKdfwaeaw");
+                    Crossroads.NORTHtoWEST = Crossroads.NORTHtoSOUTH = Crossroads.NORTHtoEAST = 1;
                     Crossroads.STATE = 0;
                 }
                 System.out.println("TICKed" + Crossroads.EASTtoWEST);
@@ -65,6 +75,8 @@ public class Crossroads extends Agent{
                 
                Crossroads.WESTtoEAST = 0;Crossroads.WESTtoNORTH = 0;
                Crossroads.EASTtoWEST= 0;Crossroads.EASTtoSOUTH = 0;
+               Crossroads.NORTHtoWEST = Crossroads.NORTHtoSOUTH = Crossroads.NORTHtoEAST = 0;
+               Crossroads.SOUTHtoWEST = Crossroads.SOUTHtoNORTH = Crossroads.SOUTHtoEAST = 0;
             }
         });
         
