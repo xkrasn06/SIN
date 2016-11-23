@@ -5,6 +5,7 @@
  */
 package sin;
 
+import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 
@@ -41,7 +42,7 @@ public class VehicleAgent extends Agent {
               x = 700;
               y = 680;
          }
-         String s = getAID().getName();
+         AID s = getAID();
          MainAgent.AgentListElement a;
          a = new MainAgent.AgentListElement(x,y,type,s);
          MainAgent.AgentList.add(a);

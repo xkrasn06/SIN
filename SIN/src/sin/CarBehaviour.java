@@ -22,10 +22,10 @@ public class CarBehaviour extends CyclicBehaviour {
     private static PaintPanel Panel;
     private int from;
     private int to;
-    private final String name;
+    private final AID name;
     private boolean stopped = false;
   
-    public CarBehaviour(String name, int from, int to) {
+    public CarBehaviour(AID name, int from, int to) {
        this.name = name;
        this.from = from;
        this.to = to;

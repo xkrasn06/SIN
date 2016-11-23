@@ -40,10 +40,10 @@ public class MainAgent extends Agent{
             public int  x;
             public int y;
             public int type;
-            public String name;
+            public AID name;
             
             
-            public AgentListElement(int x, int y, int type, String name) {
+            public AgentListElement(int x, int y, int type, AID name) {
                 this.x=x;
                 this.y=y;
                 this.type=type;

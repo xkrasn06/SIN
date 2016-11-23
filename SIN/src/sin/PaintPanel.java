@@ -227,7 +227,11 @@ public class PaintPanel extends JPanel {
                drawArrow(g,thirdX+vertDiff/2+vertDiff*2,horupY-vertDiff*3,thirdX+vertDiff/2+vertDiff*2+15,horupY-vertDiff-10);
              //  this.paintBackground = false;
              //  } 
+                if (Crossroads.WESTtoEAST == 0)
+                    g.setColor(Color.red);
+                else g.setColor(Color.green);
                g2D.fillOval(firstX+secX+vertDiff/2, hordownY-vertDiff/2-10, 15,15 );
+               g.setColor(Color.green);
                paintVehicle(g);
               // this.paintBackground =true;
              /*       spectral_color((double) SB3);

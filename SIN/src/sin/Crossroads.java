@@ -13,16 +13,16 @@ import jade.core.Agent;
  * @author Milan
  */
 public class Crossroads extends Agent{
-    private static int WESTtoEAST = 0;
-    private static int WESTtoNORTH = 0;
-    private static int EASTtoWEST = 0;
-    private static int EASTtoSOUTH = 0;
-    private static int SOUTHtoWEST = 0;
-    private static int SOUTHtoNORTH = 0;
-    private static int SOUTHtoEAST = 0;
-    private static int NORTHtoWEST = 0;
-    private static int NORTHtoSOUTH = 0;
-    private static int NORTHtoEAST = 0;
+    public static int WESTtoEAST = 0;
+    public static int WESTtoNORTH = 0;
+    public static int EASTtoWEST = 0;
+    public static int EASTtoSOUTH = 0;
+    public static int SOUTHtoWEST = 0;
+    public static int SOUTHtoNORTH = 0;
+    public static int SOUTHtoEAST = 0;
+    public static int NORTHtoWEST = 0;
+    public static int NORTHtoSOUTH = 0;
+    public static int NORTHtoEAST = 0;
     
     private boolean crossroadChanged = false;
     private static int WESTtoEASTcars = 0;
@@ -31,8 +31,10 @@ public class Crossroads extends Agent{
     
      protected void setup() {
          System.out.println("Crosseoads Agent "+ getAID().getName()+ " has started");
+         addBehaviour(new CrossroadController());
         addBehaviour(new CrossroadListener());
         crossroadsAID = getAID();
+        
        }
      
      
