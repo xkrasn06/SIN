@@ -35,6 +35,7 @@ public class CarBehaviour extends CyclicBehaviour {
     @Override
     public void action() {
        // Panel.updateVehicles(this.posX,this.posY);
+       //System.out.println(Crossroads.getWestToEastCars());
        ACLMessage msg = myAgent.receive();
         if (msg != null) {
             String lang = msg.getLanguage();
@@ -47,7 +48,7 @@ public class CarBehaviour extends CyclicBehaviour {
        if(from==MainAgent.WEST && to==MainAgent.EAST) {
             
             try {
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(50);
             } catch (InterruptedException ex) {
                 Logger.getLogger(CarBehaviour.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -63,11 +64,15 @@ public class CarBehaviour extends CyclicBehaviour {
                     }
                     else {
                         
-                        MainAgent.AgentList.get(i).x+=40;
+                        MainAgent.AgentList.get(i).x+=5;
                         if (stopped) { 
-                            passed = true;
+                            
                             Crossroads.WestToEastCarsDec();
                         }
+                        if(MainAgent.AgentList.get(i).x>MainAgent.WESTLINE)
+                            passed = true;
+                        if(MainAgent.AgentList.get(i).x>PaintPanel.fifthX)
+                            myAgent.doDelete();
                     }
                     break;
                 }

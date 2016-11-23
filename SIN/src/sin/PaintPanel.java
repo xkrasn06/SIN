@@ -227,10 +227,60 @@ public class PaintPanel extends JPanel {
                drawArrow(g,thirdX+vertDiff/2+vertDiff*2,horupY-vertDiff*3,thirdX+vertDiff/2+vertDiff*2+15,horupY-vertDiff-10);
              //  this.paintBackground = false;
              //  } 
-                if (Crossroads.WESTtoEAST == 0)
+            
+                if (Crossroads.WESTtoEAST == 0) {
                     g.setColor(Color.red);
+                    
+                }
                 else g.setColor(Color.green);
                g2D.fillOval(firstX+secX+vertDiff/2, hordownY-vertDiff/2-10, 15,15 );
+               if (Crossroads.WESTtoNORTH == 0) {
+                    g.setColor(Color.red);
+                    
+                } else g.setColor(Color.green);
+               g2D.fillOval(firstX+secX+vertDiff/2, hordownY-vertDiff-vertDiff/2-10, 15,15 );
+               System.out.println(Crossroads.EASTtoWEST);
+               if (Crossroads.EASTtoWEST == 0) {
+                    g.setColor(Color.red);
+                    
+                } else g.setColor(Color.green);
+               g2D.fillOval(fifthX-firstX-secX-vertDiff/2, horupY+vertDiff/2, 15,15 );
+               if (Crossroads.EASTtoSOUTH == 0) {
+                    g.setColor(Color.red);
+                    
+                } else g.setColor(Color.green);
+               g2D.fillOval(fifthX-firstX-secX-vertDiff/2, horupY+vertDiff+vertDiff/2, 15,15 );
+               if (Crossroads.SOUTHtoEAST == 0) {
+                    g.setColor(Color.red);
+                    
+                } else g.setColor(Color.green);
+               g2D.fillOval(thirdX+Xdiff-vertDiff/2,hordownY+vertDiff/2, 15,15 );
+               if (Crossroads.SOUTHtoNORTH == 0) {
+                    g.setColor(Color.red);
+                    
+                } else g.setColor(Color.green);
+               g2D.fillOval(thirdX+Xdiff-vertDiff-vertDiff/2,hordownY+vertDiff/2, 15,15 );
+               if (Crossroads.SOUTHtoWEST == 0) {
+                    g.setColor(Color.red);
+                    
+                } else g.setColor(Color.green);
+               g2D.fillOval(thirdX+Xdiff-vertDiff*2-vertDiff/2,hordownY+vertDiff/2, 15,15 );
+               
+               if (Crossroads.NORTHtoWEST == 0) {
+                    g.setColor(Color.red);
+                    
+                } else g.setColor(Color.green);
+               g2D.fillOval(thirdX+vertDiff/2,horupY-vertDiff/2, 15,15 );
+               if (Crossroads.NORTHtoSOUTH == 0) {
+                    g.setColor(Color.red);
+                    
+                } else g.setColor(Color.green);
+               g2D.fillOval(thirdX+vertDiff/2+vertDiff,horupY-vertDiff/2, 15,15 );
+               if (Crossroads.NORTHtoEAST == 0) {
+                    g.setColor(Color.red);
+                    
+                } else g.setColor(Color.green);
+               g2D.fillOval(thirdX+vertDiff/2+vertDiff*2,horupY-vertDiff/2, 15,15 );
                g.setColor(Color.green);
                paintVehicle(g);
               // this.paintBackground =true;
