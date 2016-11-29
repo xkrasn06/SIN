@@ -35,7 +35,7 @@ public class MainAgent extends Agent{
         public static final int SOUTH = 3;
         
         public static boolean CREATE = false;
-        public static final int WESTLINE = firstX+secX-80;
+        public static final int WESTLINE = firstX+secX-50;
         public static class AgentListElement{
             public int  x;
             public int y;

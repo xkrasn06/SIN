@@ -18,8 +18,8 @@ import java.util.logging.Logger;
  * @author Milan
  */
 public class Crossroads extends Agent{
-    public static int WESTtoEAST = 1;
-    public static int WESTtoNORTH = 1;
+    public static int WESTtoEAST = 0;
+    public static int WESTtoNORTH = 0;
     public static int EASTtoWEST = 0;
     public static int EASTtoSOUTH = 0;
     public static int SOUTHtoWEST = 0;
@@ -28,7 +28,7 @@ public class Crossroads extends Agent{
     public static int NORTHtoWEST = 0;
     public static int NORTHtoSOUTH = 0;
     public static int NORTHtoEAST = 0;
-    public static int STATE = 1;
+    public static int STATE = 0;
     public static boolean WAIT = true;
     
     private boolean crossroadChanged = false;
@@ -48,7 +48,7 @@ public class Crossroads extends Agent{
     private static int NORTHtoEASTcars= 0;
     private static int NORTHtoWESTcars= 0;
     
-    
+    public static int waitEW= 0;
     public static AID crossroadsAID;
     
      protected void setup() {

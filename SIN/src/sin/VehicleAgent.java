@@ -19,6 +19,7 @@ public class VehicleAgent extends Agent {
     private int to;
     private int type;
     private String name;
+    
     protected void setup() {
           System.out.println("Vehicle Agent "+ getAID().getName()+ " has started");
           Object[] args = getArguments();

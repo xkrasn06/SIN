@@ -26,7 +26,10 @@ public class CarBehaviour extends CyclicBehaviour {
     private boolean stopped = false;
     private boolean passed = false;
     private boolean sent = false;
+    private boolean start = false;
     private int quenum = 0;
+    private int quenumStart;
+ 
     public CarBehaviour(AID name, int from, int to) {
        this.name = name;
        this.from = from;
@@ -41,26 +44,35 @@ public class CarBehaviour extends CyclicBehaviour {
         if (msg != null) {
             String lang = msg.getLanguage();
             String con = msg.getContent();
-            
+           // quenum = Integer.parseInt(con);
         }
         else {
           
         }
        if(from==MainAgent.WEST && to==MainAgent.EAST) {
-            
+            if (!start) {
+                quenumStart = Crossroads.getWestToEastCars();
+                start = true;
+            }
+            quenum = quenumStart;
+            if (Crossroads.getWestToEastCars() < quenumStart)
+                quenum = quenumStart - Crossroads.getWestToEastCars();
+            System.out.println(quenum);
             try {
                 TimeUnit.MILLISECONDS.sleep(50);
             } catch (InterruptedException ex) {
                 Logger.getLogger(CarBehaviour.class.getName()).log(Level.SEVERE, null, ex);
             }
+            System.out.println(Crossroads.getWestToEastCars());
             for (int i = 0; i < MainAgent.AgentList.size(); i++) {
              
                 if(MainAgent.AgentList.get(i).name.equals(name)) {
                     // pozicia zastavenia ciara krizovatky plus pocet aut
-                    int newPos=MainAgent.AgentList.get(i).x+Crossroads.getWestToEastCars()*50;
+                    int newPos=MainAgent.AgentList.get(i).x+5+quenum*50;
                     if ((newPos > MainAgent.WESTLINE) && (Crossroads.getWestToEast() == 0) && (!passed)) {
-                        if (!stopped) Crossroads.WestToEastCarsInc();
+                       // if (!stopped) Crossroads.WestToEastCarsInc();
                         stopped = true;
+                       
                         break;
                     }
                     else {
@@ -72,7 +84,9 @@ public class CarBehaviour extends CyclicBehaviour {
                      //   }
                         if(MainAgent.AgentList.get(i).x>MainAgent.WESTLINE) {
                             passed = true;
+                           
                             if(!sent) {
+                                
                                 sendWelcomeMessage(from,to, false);
                                 sent = true;
                             }
