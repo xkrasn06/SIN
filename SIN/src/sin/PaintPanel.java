@@ -239,7 +239,7 @@ public class PaintPanel extends JPanel {
                     
                 } else g.setColor(Color.green);
                g2D.fillOval(firstX+secX+vertDiff/2, hordownY-vertDiff-vertDiff/2-10, 15,15 );
-               System.out.println(Crossroads.EASTtoWEST);
+              // System.out.println(Crossroads.EASTtoWEST);
                if (Crossroads.EASTtoWEST == 0) {
                     g.setColor(Color.red);
                     

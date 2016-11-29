@@ -46,7 +46,7 @@ public class VehicleAgent extends Agent {
          MainAgent.AgentListElement a;
          a = new MainAgent.AgentListElement(x,y,type,s);
          MainAgent.AgentList.add(a);
-         sendWelcomeMessage(from,to);
+         sendWelcomeMessage(from,to, true);
          addBehaviour(new CarBehaviour(s, from, to));
          
           
@@ -68,7 +68,7 @@ public class VehicleAgent extends Agent {
         System.out.println("Vehicle Agent "+ getAID().getName()+ " has terminated"); 
     }
     
-    private void sendWelcomeMessage(int from, int to) {
+    public void sendWelcomeMessage(int from, int to, boolean dir) {
         
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.addReceiver(Crossroads.crossroadsAID);
@@ -90,9 +90,9 @@ public class VehicleAgent extends Agent {
             toS = "EAST";
         else if (to == MainAgent.SOUTH)
             toS = "SOUTH";
-        
-        msg.setContent(fromS+"to"+toS);
-        
+        if (dir==true)
+            msg.setContent(fromS+"to"+toS);
+        else msg.setContent(fromS+"exit"+toS);
         send(msg);
     }
 }

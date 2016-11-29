@@ -25,7 +25,8 @@ public class CarBehaviour extends CyclicBehaviour {
     private final AID name;
     private boolean stopped = false;
     private boolean passed = false;
-  
+    private boolean sent = false;
+    private int quenum = 0;
     public CarBehaviour(AID name, int from, int to) {
        this.name = name;
        this.from = from;
@@ -65,12 +66,17 @@ public class CarBehaviour extends CyclicBehaviour {
                     else {
                         
                         MainAgent.AgentList.get(i).x+=5;
-                        if (stopped) { 
+                        //if (stopped) { 
                             
-                            Crossroads.WestToEastCarsDec();
-                        }
-                        if(MainAgent.AgentList.get(i).x>MainAgent.WESTLINE)
+                      //      Crossroads.WestToEastCarsDec();
+                     //   }
+                        if(MainAgent.AgentList.get(i).x>MainAgent.WESTLINE) {
                             passed = true;
+                            if(!sent) {
+                                sendWelcomeMessage(from,to, false);
+                                sent = true;
+                            }
+                        }
                         if(MainAgent.AgentList.get(i).x>PaintPanel.fifthX)
                             myAgent.doDelete();
                     }
@@ -91,6 +97,34 @@ public class CarBehaviour extends CyclicBehaviour {
     public void setPanel(PaintPanel p) {
         Panel = p;
         
+    }
+    
+    public void sendWelcomeMessage(int from, int to, boolean dir) {
+        
+        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        msg.addReceiver(Crossroads.crossroadsAID);
+        String fromS = null, toS = null;
+        if (from == MainAgent.WEST)
+            fromS = "WEST";
+        else if (from == MainAgent.NORTH)
+            fromS = "NORTH";
+        else if (from == MainAgent.EAST)
+            fromS = "EAST";
+        else if (from == MainAgent.SOUTH)
+            fromS = "SOUTH";
+        
+        if (to == MainAgent.WEST)
+            toS = "WEST";
+        else if (to == MainAgent.NORTH)
+            toS = "NORTH";
+        else if (to == MainAgent.EAST)
+            toS = "EAST";
+        else if (to == MainAgent.SOUTH)
+            toS = "SOUTH";
+        if (dir==true)
+            msg.setContent(fromS+"to"+toS);
+        else msg.setContent(fromS+"exit"+toS);
+        myAgent.send(msg);
     }
     
 }

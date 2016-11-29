@@ -34,6 +34,21 @@ public class Crossroads extends Agent{
     private boolean crossroadChanged = false;
     private static int WESTtoEASTcars = 0;
     private static int WESTtoNORTHcars= 0;
+    private static int WESTtoSOUTHcars= 0;
+    
+    private static int EASTtoWESTcars= 0;
+    private static int EASTtoSOUTHcars= 0;
+    private static int EASTtoNORTHcars= 0;
+    
+    private static int SOUTHtoNORTHcars= 0;
+    private static int SOUTHtoEASTcars= 0;
+    private static int SOUTHtoWESTcars= 0;
+    
+    private static int NORTHtoSOUTHcars= 0;
+    private static int NORTHtoEASTcars= 0;
+    private static int NORTHtoWESTcars= 0;
+    
+    
     public static AID crossroadsAID;
     
      protected void setup() {
@@ -45,11 +60,16 @@ public class Crossroads extends Agent{
         crossroadsAID = getAID();
         addBehaviour(new TickerBehaviour(this, 5000) {
             public void onTick() {
-                    System.out.println("TICKd" + Crossroads.STATE);
+                   // System.out.println("TICKd" + Crossroads.STATE);
                     setZero(); 
                 if (Crossroads.WAIT) {
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(3000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(CarBehaviour.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     Crossroads.WAIT = false;
-                    return;
+                    //return;
                 }   
                 if (Crossroads.STATE == 0) {
                    
@@ -75,7 +95,7 @@ public class Crossroads extends Agent{
                     Crossroads.STATE = 0;
                     Crossroads.WAIT = true;
                 }
-                System.out.println("TICKed" + Crossroads.EASTtoWEST);
+                //System.out.println("TICKed" + Crossroads.EASTtoWEST);
                 
             }
             
@@ -106,6 +126,82 @@ public class Crossroads extends Agent{
      public static void WestToEastCarsDec() {
          Crossroads.WESTtoEASTcars--;
      }
+     
+     public static void WestToSouthCarsInc() {
+         Crossroads.WESTtoSOUTHcars++;
+     }
+     public static void WestToSouthCarsDec() {
+         Crossroads.WESTtoSOUTHcars--;
+     }
+     
+     public static void WestToNorthCarsInc() {
+         Crossroads.WESTtoNORTHcars++;
+     }
+     public static void WestToNorthCarsDec() {
+         Crossroads.WESTtoNORTHcars--;
+     }
+     
+     public static void EastToWestCarsInc() {
+         Crossroads.EASTtoWESTcars++;
+     }
+     public static void EastToWestCarsDec() {
+         Crossroads.EASTtoWESTcars--;
+     }
+     public static void EastToSouthCarsInc() {
+         Crossroads.EASTtoSOUTHcars++;
+     }
+     public static void EastToSouthCarsDec() {
+         Crossroads.EASTtoSOUTHcars--;
+     }
+     public static void EastToNorthCarsInc() {
+         Crossroads.EASTtoNORTHcars++;
+     }
+     public static void EastToNorthCarsDec() {
+         Crossroads.EASTtoNORTHcars--;
+     }
+     
+     public static void SouthToNorthCarsInc() {
+         Crossroads.SOUTHtoNORTHcars++;
+     }
+     public static void SouthToNorthCarsDec() {
+         Crossroads.SOUTHtoNORTHcars--;
+     }
+     
+     public static void SouthToEastCarsInc() {
+         Crossroads.SOUTHtoEASTcars++;
+     }
+     public static void SouthToEastCarsDec() {
+         Crossroads.SOUTHtoEASTcars--;
+     }
+     
+     public static void SouthToWestCarsInc() {
+         Crossroads.SOUTHtoWESTcars++;
+     }
+     public static void SouthToWestCarsDec() {
+         Crossroads.SOUTHtoWESTcars--;
+     }
+     
+     public static void NorthToSouthCarsInc() {
+         Crossroads.NORTHtoSOUTHcars++;
+     }
+     public static void NorthToSouthCarsDec() {
+         Crossroads.NORTHtoSOUTHcars--;
+     }
+     
+     public static void NorthToEastCarsInc() {
+         Crossroads.NORTHtoEASTcars++;
+     }
+     public static void NorthToEastCarsDec() {
+         Crossroads.NORTHtoEASTcars--;
+     }
+     
+     public static void NorthToWestCarsInc() {
+         Crossroads.NORTHtoWESTcars++;
+     }
+     public static void NorthToWestCarsDec() {
+         Crossroads.NORTHtoWESTcars--;
+     }
+     
      public AID getAI() {
          return getAID();
      }
