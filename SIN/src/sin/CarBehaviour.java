@@ -20,6 +20,8 @@ import java.util.logging.Logger;
  */
 public class CarBehaviour extends CyclicBehaviour {
     private static PaintPanel Panel;
+    private static final int waitPos[] = {MainAgent.WESTLINE-5, MainAgent.WESTLINE-50, MainAgent.WESTLINE-100 }; 
+    
     private int from;
     private int to;
     private final AID name;
@@ -27,9 +29,10 @@ public class CarBehaviour extends CyclicBehaviour {
     private boolean passed = false;
     private boolean sent = false;
     private boolean start = false;
+    private boolean red = false;
     private int quenum = 0;
     private int quenumStart;
- 
+    private int que = -1;
     public CarBehaviour(AID name, int from, int to) {
        this.name = name;
        this.from = from;
@@ -68,13 +71,28 @@ public class CarBehaviour extends CyclicBehaviour {
              
                 if(MainAgent.AgentList.get(i).name.equals(name)) {
                     // pozicia zastavenia ciara krizovatky plus pocet aut
-                    int newPos=MainAgent.AgentList.get(i).x+5+quenum*50;
-                    if ((newPos > MainAgent.WESTLINE) && (Crossroads.getWestToEast() == 0) && (!passed)) {
+                    int newPos=MainAgent.AgentList.get(i).x+5; //+quenum*50;
+                    if (Crossroads.getWestToEast() == 0) red= true;
+                    else red = false;
+                    if (MainAgent.AgentList.get(i).x > MainAgent.WESTLINE) passed = true;
+                    if (red) {
+                        if (que<0)
+                        que = Crossroads.waitEW++;
+                        
+                        if ((newPos > MainAgent.WESTLINE-que*50) && (!passed)) {
+                           
+                            
+                            break;
+                        }
+                        else  MainAgent.AgentList.get(i).x+=5;
+                    }
+                 //   else 
+                    /*if ((newPos > MainAgent.WESTLINE-quenum*50) && (red) && (!passed)) {
                        // if (!stopped) Crossroads.WestToEastCarsInc();
                         stopped = true;
                        
                         break;
-                    }
+                    }*/
                     else {
                         
                         MainAgent.AgentList.get(i).x+=5;
@@ -86,15 +104,16 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                            
                             if(!sent) {
-                                
+                                Crossroads.waitEW--;
                                 sendWelcomeMessage(from,to, false);
                                 sent = true;
                             }
                         }
-                        if(MainAgent.AgentList.get(i).x>PaintPanel.fifthX)
-                            myAgent.doDelete();
+                        
                     }
-                    break;
+                    if(MainAgent.AgentList.get(i).x>PaintPanel.fifthX)
+                            myAgent.doDelete();
+                   // break;
                 }
             }
        }
