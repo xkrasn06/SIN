@@ -124,7 +124,7 @@ public class MainAgent extends Agent{
                        if (randomInt < 33) endpointToName=MainAgent.NORTH;
                         else if (randomInt < 66) endpointToName=MainAgent.NORTH;
                         else endpointToName=MainAgent.NORTH;
-                       endpointToName=MainAgent.WEST;
+                       endpointToName=MainAgent.EAST;
                        CREATESOUTH=false;
                     } else
                     if (CREATEWEST) {
@@ -140,6 +140,7 @@ public class MainAgent extends Agent{
                        if (randomInt < 33) endpointToName=MainAgent.SOUTH;
                        else if (randomInt < 66) endpointToName=MainAgent.SOUTH;
                        else endpointToName=MainAgent.SOUTH;
+                       endpointToName=MainAgent.EAST;
                        CREATENORTH=false;
                     } 
                     

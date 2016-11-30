@@ -329,7 +329,7 @@ public class CarBehaviour extends CyclicBehaviour {
                         }
                         
                     }
-                    if(MainAgent.AgentList.get(i).x<0)
+                    if(MainAgent.AgentList.get(i).y>PaintPanel.downY)
                             myAgent.doDelete();
                    // break;
                 }
@@ -347,7 +347,7 @@ public class CarBehaviour extends CyclicBehaviour {
                 if(MainAgent.AgentList.get(i).name.equals(name)) {
                     // pozicia zastavenia ciara krizovatky plus pocet aut
                     int newPos=MainAgent.AgentList.get(i).y-5; //+quenum*50;
-                    if (Crossroads.getSouthToNorth() == 0) red= true;
+                    if (Crossroads.getSouthToWest() == 0) red= true;
                         else red = false;
                     if (MainAgent.AgentList.get(i).y < MainAgent.SOUTHLINE) passed = true;
                     if (passed) red=false;
@@ -382,6 +382,112 @@ public class CarBehaviour extends CyclicBehaviour {
                         
                     }
                     if(MainAgent.AgentList.get(i).x<0)
+                            myAgent.doDelete();
+                   // break;
+                }
+            }
+       } else  if(from==MainAgent.SOUTH && to==MainAgent.EAST) {
+        
+            try {
+                TimeUnit.MILLISECONDS.sleep(50);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(CarBehaviour.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //System.out.println(Crossroads.getWestToEastCars());
+            for (int i = 0; i < MainAgent.AgentList.size(); i++) {
+             
+                if(MainAgent.AgentList.get(i).name.equals(name)) {
+                    // pozicia zastavenia ciara krizovatky plus pocet aut
+                    int newPos=MainAgent.AgentList.get(i).y-5; //+quenum*50;
+                    if (Crossroads.getSouthToEast() == 0) red= true;
+                        else red = false;
+                    if (MainAgent.AgentList.get(i).y < MainAgent.SOUTHLINE) passed = true;
+                    if (passed) red=false;
+                    if (red) {
+                        if (que<0)
+                        que = Crossroads.waitSE++;
+                         if ((newPos < MainAgent.SOUTHLINE+que*50) && (!passed)) {
+                           break;
+                        }
+                        else  MainAgent.AgentList.get(i).y-=5;
+                    }
+                    else {
+                        if (MainAgent.AgentList.get(i).y > MainAgent.SOUTHLINE-vertDiff*2+5)
+                            MainAgent.AgentList.get(i).y-=5;
+                        else {
+                            if (!turned) {
+                                MainAgent.AgentList.get(i).type = 0;
+                                turned = true;
+                            }
+                            MainAgent.AgentList.get(i).x+=5;
+                        }
+                      /*  if ((MainAgent.AgentList.get(i).y<MainAgent.SOUTHLINE) && (MainAgent.AgentList.get(i).y>MainAgent.NORTHLINE2+vertDiff+5))
+                            MainAgent.AgentList.get(i).x-=1;*/
+                        if(MainAgent.AgentList.get(i).y<MainAgent.SOUTHLINE) {
+                            passed = true;
+                            if(!sent) {
+                                Crossroads.waitSE--;
+                                sendWelcomeMessage(from,to, false);
+                                sent = true;
+                            }
+                        }
+                        
+                    }
+                    if(MainAgent.AgentList.get(i).x>PaintPanel.fifthX)
+                            myAgent.doDelete();
+                   // break;
+                }
+            }
+       } else
+          if(from==MainAgent.NORTH && to==MainAgent.EAST) {
+        
+            try {
+                TimeUnit.MILLISECONDS.sleep(50);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(CarBehaviour.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //System.out.println(Crossroads.getWestToEastCars());
+            for (int i = 0; i < MainAgent.AgentList.size(); i++) {
+             
+                if(MainAgent.AgentList.get(i).name.equals(name)) {
+                    // pozicia zastavenia ciara krizovatky plus pocet aut
+                    int newPos=MainAgent.AgentList.get(i).y+5; //+quenum*50;
+                    if (Crossroads.getNorthToEast() == 0) red= true;
+                    else red = false;
+                    if (MainAgent.AgentList.get(i).y > MainAgent.NORTHLINE) passed = true;
+                    if (passed) red = false;
+                    if (red) {
+                        if (que<0)
+                        que = Crossroads.waitNE++;
+                         if ((newPos > MainAgent.NORTHLINE-que*50) && (!passed)) {
+                           break;
+                        }
+                        else  MainAgent.AgentList.get(i).y+=5;
+                    }
+                    else {
+                        if (MainAgent.AgentList.get(i).y<MainAgent.SOUTHLINE-vertDiff*2+5) 
+                            
+                            MainAgent.AgentList.get(i).y+=5;
+                        else {
+                            if (!turned) {
+                                MainAgent.AgentList.get(i).type = 0;
+                                turned = true;
+                            }
+                            MainAgent.AgentList.get(i).x+=5;
+                        }
+                        if ((MainAgent.AgentList.get(i).y>MainAgent.NORTHLINE) && (MainAgent.AgentList.get(i).y<MainAgent.SOUTHLINE-vertDiff*2+5))
+                            MainAgent.AgentList.get(i).x+=1;
+                        if(MainAgent.AgentList.get(i).y>MainAgent.NORTHLINE) {
+                            passed = true;
+                            if(!sent) {
+                                Crossroads.waitNE--;
+                                sendWelcomeMessage(from,to, false);
+                                sent = true;
+                            }
+                        }
+                        
+                    }
+                    if(MainAgent.AgentList.get(i).x>PaintPanel.fifthX)
                             myAgent.doDelete();
                    // break;
                 }
