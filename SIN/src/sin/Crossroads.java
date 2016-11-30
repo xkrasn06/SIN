@@ -28,7 +28,7 @@ public class Crossroads extends Agent{
     public static int NORTHtoWEST = 0;
     public static int NORTHtoSOUTH = 0;
     public static int NORTHtoEAST = 0;
-    public static int STATE = 3;
+    public static int STATE = 1;
     public static boolean WAIT = true;
     
     private boolean crossroadChanged = false;
@@ -58,6 +58,8 @@ public class Crossroads extends Agent{
     public static int waitSW= 0;
     public static int waitNE= 0;
     public static int waitNW= 0;
+    public static int waitWS= 0;
+    public static int waitEN= 0;
     public static AID crossroadsAID;
     
      protected void setup() {
