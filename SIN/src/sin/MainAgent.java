@@ -113,34 +113,34 @@ public class MainAgent extends Agent{
                     if (CREATEEAST) {
                         endpointFromName=MainAgent.EAST;
                         if (randomInt < 33) endpointToName=MainAgent.WEST;
-                        else if (randomInt < 66) endpointToName=MainAgent.WEST;
-                        else endpointToName=MainAgent.WEST;
-                        endpointToName=MainAgent.NORTH;
+                        else if (randomInt < 66) endpointToName=MainAgent.NORTH;
+                        else endpointToName=MainAgent.SOUTH;
+                       // endpointToName=MainAgent.NORTH;
                         CREATEEAST=false;
                         
                     } else
                     if (CREATESOUTH) {
                        endpointFromName=MainAgent.SOUTH;
                        if (randomInt < 33) endpointToName=MainAgent.NORTH;
-                        else if (randomInt < 66) endpointToName=MainAgent.NORTH;
-                        else endpointToName=MainAgent.NORTH;
-                       endpointToName=MainAgent.EAST;
+                        else if (randomInt < 66) endpointToName=MainAgent.WEST;
+                        else endpointToName=MainAgent.EAST;
+                       //endpointToName=MainAgent.EAST;
                        CREATESOUTH=false;
                     } else
                     if (CREATEWEST) {
                        endpointFromName=MainAgent.WEST;
                        if (randomInt < 33) endpointToName=MainAgent.EAST;
-                       else if (randomInt < 66) endpointToName=MainAgent.EAST;
-                       else endpointToName=MainAgent.EAST;
-                       endpointToName=MainAgent.SOUTH;
+                       else if (randomInt < 66) endpointToName=MainAgent.NORTH;
+                       else endpointToName=MainAgent.SOUTH;
+                      // endpointToName=MainAgent.SOUTH;
                        CREATEWEST=false;
                     } else
                     if (CREATENORTH) {
                        endpointFromName=MainAgent.NORTH;
                        if (randomInt < 33) endpointToName=MainAgent.SOUTH;
-                       else if (randomInt < 66) endpointToName=MainAgent.SOUTH;
-                       else endpointToName=MainAgent.SOUTH;
-                       endpointToName=MainAgent.WEST;
+                       else if (randomInt < 66) endpointToName=MainAgent.WEST;
+                       else endpointToName=MainAgent.EAST;
+                      // endpointToName=MainAgent.WEST;
                        CREATENORTH=false;
                     } 
                     
