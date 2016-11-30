@@ -110,7 +110,7 @@ public class PaintPanel extends JPanel {
                  g2D.setStroke(new BasicStroke(5));
                  
                  // spodna horizontalna  linia nalavo
-                g2D.drawLine(startX,hordownY,firstX, hordownY); 
+              //  g2D.drawLine(startX,hordownY,firstX, hordownY); 
                 g2D.drawLine(firstX+secX,hordownY,thirdX, hordownY);
                 // horna horizontalna  linia nalavo
                 g2D.drawLine(startX,horupY,thirdX, horupY);
@@ -119,7 +119,7 @@ public class PaintPanel extends JPanel {
                  g2D.drawLine(thirdX+Xdiff,hordownY,fifthX, hordownY);
                  
                  // horna horizontalna lina napravo
-                 g2D.drawLine(fifthX,horupY,fifthX-firstX, horupY);
+                 //g2D.drawLine(fifthX,horupY,fifthX-firstX, horupY);
                  g2D.drawLine(fifthX-firstX-secX,horupY,thirdX+Xdiff, horupY); 
                  
                  // spodna vertikalna linia nalavo
@@ -135,13 +135,13 @@ public class PaintPanel extends JPanel {
                  g2D.drawLine(thirdX+Xdiff,horupY-secY-thirdY,thirdX+Xdiff,0);
                   
                  // odbocovak zapad-juh
-                 g2D.drawLine(firstX,hordownY,firstX+diffX, hordownY+vertDiff);
+                 g2D.drawLine(0,hordownY+vertDiff,firstX+diffX, hordownY+vertDiff);
                  g2D.drawLine(firstX+diffX,hordownY+vertDiff,firstX+secX-vertDiff, hordownY+vertDiff);
                  g2D.drawLine(firstX+secX-vertDiff,hordownY+vertDiff,thirdX, hordownY+secY+thirdY);
                  g2D.drawLine(firstX+secX,hordownY,thirdX, hordownY+secY);
                    
                  // odbocovak vychod-sever
-                 g2D.drawLine(fifthX-firstX,horupY,fifthX-firstX-diffX, horupY-vertDiff); 
+                 g2D.drawLine(fifthX,horupY-vertDiff,fifthX-firstX-diffX, horupY-vertDiff); 
                  g2D.drawLine(fifthX-firstX-diffX,horupY-vertDiff,fifthX-firstX-secX+vertDiff, horupY-vertDiff);
                  g2D.drawLine(fifthX-firstX-secX+vertDiff,horupY-vertDiff,thirdX+Xdiff, horupY-secY-thirdY);  
                  g2D.drawLine(thirdX+Xdiff,horupY-secY,fifthX-firstX-secX,horupY);
@@ -153,7 +153,7 @@ public class PaintPanel extends JPanel {
                         BasicStroke.JOIN_MITER,
                         10.0f, dash1, 0.0f));
                  // ciary nalavo
-                 g2D.drawLine(firstX,hordownY,firstX+secX, hordownY);
+                 g2D.drawLine(0,hordownY,firstX+secX, hordownY);
                  g2D.drawLine(startX,hordownY-vertDiff,firstX+secX, hordownY-vertDiff);
                  g2D.setStroke(new BasicStroke(3));
                  g2D.drawLine(startX,hordownY-vertDiff*2,firstX+secX, hordownY-vertDiff*2);
@@ -164,7 +164,7 @@ public class PaintPanel extends JPanel {
                         BasicStroke.CAP_BUTT,
                         BasicStroke.JOIN_MITER,
                         10.0f, dash1, 0.0f));
-                 g2D.drawLine(fifthX-firstX,horupY,fifthX-firstX-secX, horupY);
+                 g2D.drawLine(fifthX,horupY,fifthX-firstX-secX, horupY);
                  g2D.drawLine(fifthX,horupY+vertDiff,fifthX-firstX-secX, horupY+vertDiff);
                  g2D.setStroke(new BasicStroke(3));
                  g2D.drawLine(fifthX,horupY+vertDiff*2,fifthX-firstX-secX, horupY+vertDiff*2);
@@ -194,10 +194,10 @@ public class PaintPanel extends JPanel {
                 
                 // sipky nalavo
                 drawArrow(g, startX+10, hordownY-vertDiff/2, firstX-vertDiff*3, hordownY-vertDiff/2);
-                drawArrow(g, startX+10, hordownY-vertDiff/2, firstX-vertDiff*3, hordownY-vertDiff/5);
+                drawArrow(g, startX+10, hordownY+vertDiff/2, firstX-vertDiff*3, hordownY+vertDiff-10);
                 
                 drawArrow(g, firstX-vertDiff, hordownY-vertDiff/2, firstX, hordownY-vertDiff/2);
-                drawArrow(g, firstX-vertDiff, hordownY-vertDiff/2, firstX, hordownY-vertDiff/5);
+                drawArrow(g, firstX-vertDiff, hordownY+vertDiff/2, firstX, hordownY+vertDiff-10);
                 
                 drawArrow(g, firstX+vertDiff*2, hordownY-vertDiff/2, firstX+vertDiff*3, hordownY-vertDiff/2);
                 drawArrow(g, firstX+vertDiff*5, hordownY-vertDiff/2, firstX+vertDiff*6, hordownY-vertDiff/2);
@@ -211,10 +211,12 @@ public class PaintPanel extends JPanel {
                 
                 // sipky napravo
                 drawArrow(g, fifthX-10,horupY+vertDiff/2,fifthX-vertDiff*2, horupY+vertDiff/2);
-                drawArrow(g, fifthX-10,horupY+vertDiff/2,fifthX-vertDiff*2, horupY+vertDiff/5);
+                //drawArrow(g, fifthX-10,horupY,fifthX-vertDiff*2, horupY+vertDiff/5);
+                drawArrow(g, fifthX-10,horupY-vertDiff/2,fifthX-vertDiff*2, horupY-vertDiff+10);
                 
                 drawArrow(g, fifthX-firstX,horupY+vertDiff/2,fifthX-firstX-vertDiff*2, horupY+vertDiff/2);
-                drawArrow(g, fifthX-firstX,horupY+vertDiff/2,fifthX-firstX-vertDiff*2, horupY+vertDiff/5);
+              //  drawArrow(g, fifthX-firstX,horupY+vertDiff/2,fifthX-firstX-vertDiff*2, horupY+vertDiff/5);
+                drawArrow(g, fifthX-firstX,horupY-vertDiff/2,fifthX-firstX-vertDiff*2, horupY-vertDiff+10);
                 
                 drawArrow(g, fifthX-firstX-vertDiff*4,horupY+vertDiff/2,fifthX-firstX-vertDiff*5, horupY+vertDiff/2);
                 drawArrow(g, fifthX-firstX-vertDiff*4,horupY-vertDiff/2,fifthX-firstX-vertDiff*5, horupY-vertDiff+10);

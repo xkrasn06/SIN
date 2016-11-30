@@ -265,7 +265,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             MainAgent.AgentList.get(i).y-=5;
                         }
                         if((MainAgent.AgentList.get(i).x > MainAgent.WESTLINE) && (MainAgent.AgentList.get(i).x < thirdX+vertDiff*3 ))
-                            MainAgent.AgentList.get(i).y-=1;
+                            MainAgent.AgentList.get(i).y-=2;
                         
                         if(MainAgent.AgentList.get(i).x>MainAgent.WESTLINE) {
                             passed = true;
