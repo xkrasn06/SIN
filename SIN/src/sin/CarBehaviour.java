@@ -113,7 +113,7 @@ public class CarBehaviour extends CyclicBehaviour {
                     if (red) {
                         if (que<0)
                         que = Crossroads.waitEW++;
-                         if ((newPos < MainAgent.EASTLINE-que*50) && (!passed)) {
+                         if ((newPos < MainAgent.EASTLINE+que*50) && (!passed)) {
                            break;
                         }
                         else  MainAgent.AgentList.get(i).x-=5;
@@ -155,13 +155,15 @@ public class CarBehaviour extends CyclicBehaviour {
                     if (red) {
                         if (que<0)
                         que = Crossroads.waitSN++;
-                         if ((newPos < MainAgent.SOUTHLINE-que*50) && (!passed)) {
+                         if ((newPos < MainAgent.SOUTHLINE+que*50) && (!passed)) {
                            break;
                         }
                         else  MainAgent.AgentList.get(i).y-=5;
                     }
                     else {
                         MainAgent.AgentList.get(i).y-=5;
+                        if ((MainAgent.AgentList.get(i).y<MainAgent.SOUTHLINE) && (MainAgent.AgentList.get(i).y>MainAgent.NORTHLINE2))
+                            MainAgent.AgentList.get(i).x+=1;
                         if(MainAgent.AgentList.get(i).y<MainAgent.SOUTHLINE) {
                             passed = true;
                             if(!sent) {
@@ -173,6 +175,50 @@ public class CarBehaviour extends CyclicBehaviour {
                         
                     }
                     if(MainAgent.AgentList.get(i).y<0)
+                            myAgent.doDelete();
+                   // break;
+                }
+            }
+       } else
+          if(from==MainAgent.NORTH && to==MainAgent.SOUTH) {
+        
+            try {
+                TimeUnit.MILLISECONDS.sleep(50);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(CarBehaviour.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //System.out.println(Crossroads.getWestToEastCars());
+            for (int i = 0; i < MainAgent.AgentList.size(); i++) {
+             
+                if(MainAgent.AgentList.get(i).name.equals(name)) {
+                    // pozicia zastavenia ciara krizovatky plus pocet aut
+                    int newPos=MainAgent.AgentList.get(i).y+5; //+quenum*50;
+                    if (Crossroads.getNorthToSouth() == 0) red= true;
+                    else red = false;
+                    if (MainAgent.AgentList.get(i).y > MainAgent.NORTHLINE) passed = true;
+                    if (red) {
+                        if (que<0)
+                        que = Crossroads.waitNS++;
+                         if ((newPos > MainAgent.NORTHLINE-que*50) && (!passed)) {
+                           break;
+                        }
+                        else  MainAgent.AgentList.get(i).y+=5;
+                    }
+                    else {
+                        MainAgent.AgentList.get(i).y+=5;
+                        if ((MainAgent.AgentList.get(i).y>MainAgent.NORTHLINE) && (MainAgent.AgentList.get(i).y<MainAgent.SOUTHLINE))
+                            MainAgent.AgentList.get(i).x-=1;
+                        if(MainAgent.AgentList.get(i).y>MainAgent.NORTHLINE) {
+                            passed = true;
+                            if(!sent) {
+                                Crossroads.waitNS--;
+                                sendWelcomeMessage(from,to, false);
+                                sent = true;
+                            }
+                        }
+                        
+                    }
+                    if(MainAgent.AgentList.get(i).y>PaintPanel.downY)
                             myAgent.doDelete();
                    // break;
                 }

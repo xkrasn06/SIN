@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import static sin.PaintPanel.fifthX;
 import static sin.PaintPanel.firstX;
 import static sin.PaintPanel.hordownY;
+import static sin.PaintPanel.horupY;
 import static sin.PaintPanel.secX;
 import static sin.PaintPanel.vertDiff;
 
@@ -41,6 +42,8 @@ public class MainAgent extends Agent{
         public static final int WESTLINE = firstX+secX-50;
         public static final int EASTLINE = fifthX-firstX-secX;
         public static final int SOUTHLINE = hordownY+vertDiff;
+        public static final int NORTHLINE = horupY-vertDiff*2;
+        public static final int NORTHLINE2 = horupY-vertDiff;
         public static class AgentListElement{
             public int  x;
             public int y;

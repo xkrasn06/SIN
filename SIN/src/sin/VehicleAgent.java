@@ -40,8 +40,8 @@ public class VehicleAgent extends Agent {
          } else if ((from==MainAgent.WEST) && (to==MainAgent.EAST)) {
               x = 20;
               y = 365;
-         } else if (from==MainAgent.NORTH) {
-              x = 700;
+         } else if ((from==MainAgent.NORTH)  && (to == MainAgent.SOUTH)){
+              x = 670;
               y = 20;
          } else if ((from==MainAgent.SOUTH) && (to == MainAgent.NORTH)) {
               x = downY-80;
