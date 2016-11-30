@@ -39,6 +39,11 @@ public class MainAgent extends Agent{
         public static final int SOUTH = 3;
         
         public static boolean CREATE = false;
+        public static boolean CREATEWEST = false;
+        public static boolean CREATEEAST = false;
+        public static boolean CREATESOUTH = false;
+        public static boolean CREATENORTH = false;
+        
         public static final int WESTLINE = firstX+secX-50;
         public static final int EASTLINE = fifthX-firstX-secX;
         public static final int SOUTHLINE = hordownY+vertDiff;
@@ -99,8 +104,8 @@ public class MainAgent extends Agent{
             public void action() {
                     if (!MainAgent.CREATE) return;
                     int type = 0;
-                    int endpointFromName = MainAgent.SOUTH;
-                    int endpointToName = MainAgent.NORTH;
+                    int endpointFromName = MainAgent.NORTH;
+                    int endpointToName = MainAgent.SOUTH;
                     if ((endpointFromName==MainAgent.SOUTH) || (endpointFromName==MainAgent.NORTH))
                         type = 1;
                     Object args[] = { endpointFromName, endpointToName, type};

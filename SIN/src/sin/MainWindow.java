@@ -48,6 +48,8 @@ public class MainWindow{
         private static JCheckBox box1;
         private static JButton btn1;
         private static JButton btn2;
+        private static JButton btn3;
+        private static JButton btn4;
         
       
 	
@@ -126,67 +128,38 @@ public class MainWindow{
 	    c.gridy = 0;
 	    pane.add(lbl3, c);
             
-           /* lbl4 = new JLabel("Wavelength (nm)", SwingConstants.CENTER);
+          
+            btn4 = new JButton("Toggle Blue Sky / Detail");
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.weightx = 0.5;
-	    c.gridx = 2;
-	    c.gridy = 0;
-	    pane.add(lbl4, c);*/
-	    
-	    
-	    
-	    sb1 = new JScrollBar(JScrollBar.HORIZONTAL);
-	    if (shouldWeightX) {
-	        c.weightx = 0.5;
-	        }
-	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.gridx = 0;
 	    c.gridy = 1;
+	    pane.add(btn4, c);
             
-            model1 = sb1.getModel();
-            model1.setRangeProperties(300, 1, 100, 500, true);
-            
-	    pane.add(sb1, c);
-            
-	    
-	    sb2 = new JScrollBar(JScrollBar.HORIZONTAL);
+            btn3 = new JButton("Toggle Blue Sky / Detail");
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.weightx = 0.5;
 	    c.gridx = 1;
 	    c.gridy = 1;
-            BoundedRangeModel model2 = sb2.getModel();
-            model2.setRangeProperties(16, 4, 1, 64, true);
-	    pane.add(sb2, c);
-	    
-	    btn1 = new JButton("Toggle Blue Sky / Detail");
+	    pane.add(btn3, c);
+            
+	    btn2 = new JButton("Toggle Blue Sky / Detail");
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.weightx = 0.5;
 	    c.gridx = 2;
+	    c.gridy = 1;
+	    pane.add(btn2, c);
+            
+	    btn1 = new JButton("Toggle Blue Sky / Detail");
+	    c.fill = GridBagConstraints.HORIZONTAL;
+	    c.weightx = 0.5;
+	    c.gridx = 3;
 	    c.gridy = 1;
 	    pane.add(btn1, c);
             
             
 	    
-	    sb3 = new JScrollBar(JScrollBar.HORIZONTAL);
-	    c.fill = GridBagConstraints.HORIZONTAL;
-	    c.weightx = 0.5;
-	    c.gridx = 3;
-	    c.gridy = 1;
-            
-            //sb3.setMaximum(30);
-            BoundedRangeModel model3 = sb3.getModel();
-            model3.setRangeProperties(500, 5, 400, 700, true);
-            
-	    pane.add(sb3, c);
-            
-            
-            
-          /*  sb4 = new JScrollBar(JScrollBar.HORIZONTAL);
-	    c.fill = GridBagConstraints.HORIZONTAL;
-	    c.weightx = 0.5;
-	    c.gridx = 1;
-	    c.gridy = 2;
-	    pane.add(sb4, c);*/
+	  
              
             
 	    paint = new PaintPanel();
@@ -201,9 +174,7 @@ public class MainWindow{
 	    pane.add(paint, c);
             
              AdjustmentListener listener = new MyAdjustmentListener(paint);
-             sb3.addAdjustmentListener(listener);
-             sb2.addAdjustmentListener(listener);
-             sb1.addAdjustmentListener(listener);
+ 
         
              box1.addActionListener(new ActionListener() {
             	    @Override

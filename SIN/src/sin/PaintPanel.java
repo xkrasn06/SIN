@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class PaintPanel extends JPanel {
-        int SB3 = MainWindow.getSB3();
-        int SB2 = MainWindow.getSB2();
-        int SB1 = MainWindow.getSB1();
+       // int SB3 = MainWindow.getSB3();
+      //  int SB2 = MainWindow.getSB2();
+      //  int SB1 = MainWindow.getSB1();
         static final int x = 705;
         static final int y = 405;
         // Y suradnice cesty zlava
