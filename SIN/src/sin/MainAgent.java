@@ -19,8 +19,11 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static sin.PaintPanel.fifthX;
 import static sin.PaintPanel.firstX;
+import static sin.PaintPanel.hordownY;
 import static sin.PaintPanel.secX;
+import static sin.PaintPanel.vertDiff;
 
 /**
  * @author Milan
@@ -36,6 +39,8 @@ public class MainAgent extends Agent{
         
         public static boolean CREATE = false;
         public static final int WESTLINE = firstX+secX-50;
+        public static final int EASTLINE = fifthX-firstX-secX;
+        public static final int SOUTHLINE = hordownY+vertDiff;
         public static class AgentListElement{
             public int  x;
             public int y;
@@ -91,8 +96,10 @@ public class MainAgent extends Agent{
             public void action() {
                     if (!MainAgent.CREATE) return;
                     int type = 0;
-                    int endpointFromName = MainAgent.WEST;
-                    int endpointToName = MainAgent.EAST;
+                    int endpointFromName = MainAgent.SOUTH;
+                    int endpointToName = MainAgent.NORTH;
+                    if ((endpointFromName==MainAgent.SOUTH) || (endpointFromName==MainAgent.NORTH))
+                        type = 1;
                     Object args[] = { endpointFromName, endpointToName, type};
                 
                     try {   

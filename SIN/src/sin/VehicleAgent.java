@@ -8,6 +8,10 @@ package sin;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
+import static sin.PaintPanel.Xdiff;
+import static sin.PaintPanel.downY;
+import static sin.PaintPanel.thirdX;
+import static sin.PaintPanel.vertDiff;
 
 /**
  *
@@ -30,18 +34,18 @@ public class VehicleAgent extends Agent {
           
          System.out.println("True "+ from + to);
          int x =0,y=0;
-         if(from == MainAgent.EAST) {      
-                x = 1080;
-                y = 420;
-         } else if (from==MainAgent.WEST) {
+         if((from == MainAgent.EAST) && (to==MainAgent.WEST)) {      
+                x = PaintPanel.fifthX-80;
+                y = 260;
+         } else if ((from==MainAgent.WEST) && (to==MainAgent.EAST)) {
               x = 20;
               y = 365;
          } else if (from==MainAgent.NORTH) {
               x = 700;
               y = 20;
-         } else if (from==MainAgent.SOUTH) {
-              x = 700;
-              y = 680;
+         } else if ((from==MainAgent.SOUTH) && (to == MainAgent.NORTH)) {
+              x = downY-80;
+              y = thirdX+Xdiff-vertDiff;
          }
          AID s = getAID();
          MainAgent.AgentListElement a;

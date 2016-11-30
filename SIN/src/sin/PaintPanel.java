@@ -88,7 +88,10 @@ public class PaintPanel extends JPanel {
              for (int i = 0; i < MainAgent.AgentList.size(); i++) {
                  int x = MainAgent.AgentList.get(i).x;
                  int y = MainAgent.AgentList.get(i).y;
-                  g2D.fillRect(x, y, 40, 27);
+                 int type = MainAgent.AgentList.get(i).type; 
+                 if (type==0)
+                    g2D.fillRect(x, y, 40, 27);
+                 else g2D.fillRect(x, y, 27, 40);
              }
             //g2D.fillRect(posX, posY, 15, 10);
              //System.out.println("PaintVehicle");

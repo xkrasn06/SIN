@@ -49,6 +49,15 @@ public class Crossroads extends Agent{
     private static int NORTHtoWESTcars= 0;
     
     public static int waitEW= 0;
+    public static int waitWE= 0;
+    public static int waitSN= 0;
+    public static int waitNS= 0;
+    public static int waitWN= 0;
+    public static int waitES= 0;
+    public static int waitSE= 0;
+    public static int waitSW= 0;
+    public static int waitNE= 0;
+    public static int waitNW= 0;
     public static AID crossroadsAID;
     
      protected void setup() {
@@ -113,8 +122,35 @@ public class Crossroads extends Agent{
      
      public static int  getWestToEast() {
          return Crossroads.WESTtoEAST;
-             
      }
+     public static int  getEastToWest() {
+         return Crossroads.EASTtoWEST;
+     }
+     public static int  getWestToNorth() {
+         return Crossroads.WESTtoNORTH;
+     }
+     public static int  getEastToSouth() {
+         return Crossroads.EASTtoSOUTH;
+     }
+     public static int  getNorthToSouth() {
+         return Crossroads.NORTHtoSOUTH;
+     }
+     public static int  getNorthToEast() {
+         return Crossroads.NORTHtoEAST;
+     }
+     public static int  getNorthToWest() {
+         return Crossroads.NORTHtoWEST;
+     }
+     public static int  getSouthToNorth() {
+         return Crossroads.SOUTHtoNORTH;
+     }
+     public static int  getSouthToEast() {
+         return Crossroads.SOUTHtoEAST;
+     }
+     public static int  getSouthToWest() {
+         return Crossroads.SOUTHtoWEST;
+     }
+     
      
      public static int getWestToEastCars() {
          return Crossroads.WESTtoEASTcars;
