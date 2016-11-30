@@ -68,6 +68,9 @@ public class VehicleAgent extends Agent {
          }else if ((from==MainAgent.WEST) && (to==MainAgent.SOUTH)) {
               x = 20;
               y = 415;
+         } else if((from == MainAgent.EAST) && (to==MainAgent.NORTH)) {      
+                x = PaintPanel.fifthX-80;
+                y = 210;
          }
          AID s = getAID();
          MainAgent.AgentListElement a;
