@@ -12,6 +12,8 @@ import jade.lang.acl.ACLMessage;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static sin.PaintPanel.thirdX;
+import static sin.PaintPanel.vertDiff;
 
 
 /**
@@ -33,6 +35,7 @@ public class CarBehaviour extends CyclicBehaviour {
     private int quenum = 0;
     private int quenumStart;
     private int que = -1;
+    private boolean turned = false;
     public CarBehaviour(AID name, int from, int to) {
        this.name = name;
        this.from = from;
@@ -219,6 +222,59 @@ public class CarBehaviour extends CyclicBehaviour {
                         
                     }
                     if(MainAgent.AgentList.get(i).y>PaintPanel.downY)
+                            myAgent.doDelete();
+                   // break;
+                }
+            }
+       } else if(from==MainAgent.WEST && to==MainAgent.NORTH) {
+        
+            try {
+                TimeUnit.MILLISECONDS.sleep(50);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(CarBehaviour.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //System.out.println(Crossroads.getWestToEastCars());
+            for (int i = 0; i < MainAgent.AgentList.size(); i++) {
+             
+                if(MainAgent.AgentList.get(i).name.equals(name)) {
+                    // pozicia zastavenia ciara krizovatky plus pocet aut
+                    int newPos=MainAgent.AgentList.get(i).x+5; //+quenum*50;
+                    if (Crossroads.getWestToNorth() == 0) red= true;
+                    else red = false;
+                    if (MainAgent.AgentList.get(i).x > MainAgent.WESTLINE) passed = true;
+                    if (passed) red = false;
+                    if (red) {
+                        if (que<0)
+                        que = Crossroads.waitWN++;
+                         if ((newPos > MainAgent.WESTLINE-que*50) && (!passed)) {
+                           break;
+                        }
+                        else  MainAgent.AgentList.get(i).x+=5;
+                    }
+                    else {
+                        if (MainAgent.AgentList.get(i).x < thirdX+vertDiff*3+5 )
+                            MainAgent.AgentList.get(i).x+=5;
+                        else {
+                            if (!turned) {
+                                MainAgent.AgentList.get(i).type = 1;
+                                turned = true;
+                            }
+                            MainAgent.AgentList.get(i).y-=5;
+                        }
+                        if((MainAgent.AgentList.get(i).x > MainAgent.WESTLINE) && (MainAgent.AgentList.get(i).x < thirdX+vertDiff*3 ))
+                            MainAgent.AgentList.get(i).y-=1;
+                        
+                        if(MainAgent.AgentList.get(i).x>MainAgent.WESTLINE) {
+                            passed = true;
+                            if(!sent) {
+                                Crossroads.waitWN--;
+                                sendWelcomeMessage(from,to, false);
+                                sent = true;
+                            }
+                        }
+                        
+                    }
+                    if(MainAgent.AgentList.get(i).y<0)
                             myAgent.doDelete();
                    // break;
                 }
