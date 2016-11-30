@@ -16,6 +16,7 @@ import jade.core.ProfileImpl;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,6 +50,7 @@ public class MainAgent extends Agent{
         public static final int SOUTHLINE = hordownY+vertDiff;
         public static final int NORTHLINE = horupY-vertDiff*2;
         public static final int NORTHLINE2 = horupY-vertDiff;
+        
         public static class AgentListElement{
             public int  x;
             public int y;
@@ -104,8 +106,40 @@ public class MainAgent extends Agent{
             public void action() {
                     if (!MainAgent.CREATE) return;
                     int type = 0;
-                    int endpointFromName = MainAgent.NORTH;
-                    int endpointToName = MainAgent.SOUTH;
+                    int endpointFromName = 0; 
+                    int endpointToName =0;
+                    Random randomGenerator = new Random();
+                    int randomInt = randomGenerator.nextInt(100);
+                    if (CREATEEAST) {
+                        endpointFromName=MainAgent.EAST;
+                        if (randomInt < 33) endpointToName=MainAgent.WEST;
+                        else if (randomInt < 66) endpointToName=MainAgent.WEST;
+                        else endpointToName=MainAgent.WEST;
+                        CREATEEAST=false;
+                        
+                    } else
+                    if (CREATESOUTH) {
+                       endpointFromName=MainAgent.SOUTH;
+                       if (randomInt < 33) endpointToName=MainAgent.NORTH;
+                        else if (randomInt < 66) endpointToName=MainAgent.NORTH;
+                        else endpointToName=MainAgent.NORTH;
+                       CREATESOUTH=false;
+                    } else
+                    if (CREATEWEST) {
+                       endpointFromName=MainAgent.WEST;
+                       if (randomInt < 33) endpointToName=MainAgent.EAST;
+                       else if (randomInt < 66) endpointToName=MainAgent.EAST;
+                       else endpointToName=MainAgent.EAST;
+                       CREATEWEST=false;
+                    } else
+                    if (CREATENORTH) {
+                       endpointFromName=MainAgent.NORTH;
+                       if (randomInt < 33) endpointToName=MainAgent.SOUTH;
+                       else if (randomInt < 66) endpointToName=MainAgent.SOUTH;
+                       else endpointToName=MainAgent.SOUTH;
+                       CREATENORTH=false;
+                    } 
+                    
                     if ((endpointFromName==MainAgent.SOUTH) || (endpointFromName==MainAgent.NORTH))
                         type = 1;
                     Object args[] = { endpointFromName, endpointToName, type};

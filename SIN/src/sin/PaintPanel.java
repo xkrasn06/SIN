@@ -86,6 +86,7 @@ public class PaintPanel extends JPanel {
           //  super.paintComponent(g);
             g2D.setColor(Color.GREEN);
              for (int i = 0; i < MainAgent.AgentList.size(); i++) {
+                 
                  int x = MainAgent.AgentList.get(i).x;
                  int y = MainAgent.AgentList.get(i).y;
                  int type = MainAgent.AgentList.get(i).type; 

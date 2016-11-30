@@ -96,24 +96,24 @@ public class MainWindow{
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    }
 	    
-	    lbl1 = new JLabel("Size of scatterer (x10^(-10) m):", SwingConstants.CENTER);
+	    lbl1 = new JLabel("SPAWN FROM WEST", SwingConstants.CENTER);
 	    if (shouldWeightX) {
 	  //  c.weightx = 0.5;
 	    }
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.gridx = 0;
 	    c.gridy = 0;
-	    pane.add(lbl1, c);
+	   // pane.add(lbl1, c);
 	 
-	    lbl2 = new JLabel("Number of scatterers", SwingConstants.CENTER);
+	    lbl2 = new JLabel("SPAWN FROM SOUTH", SwingConstants.CENTER);
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	   // c.weightx = 0.2;
 	    c.gridx = 1;
 	    c.gridy = 0;
-	    pane.add(lbl2, c);
+	   // pane.add(lbl2, c);
 	    
 	    box1 = new JCheckBox("Random Angles",true);
-	    box1.setText("Random Angles");
+	    box1.setText("< - Random ");
             //box1.turnCheckBox.setSelected(isSelected);
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	  //  c.weightx = 0.2;
@@ -121,36 +121,36 @@ public class MainWindow{
 	    c.gridy = 0;
 	    pane.add(box1, c);
 	 
-	    lbl3 = new JLabel("Wavelength (nm)", SwingConstants.CENTER);
+	    lbl3 = new JLabel("SPAWN FROM EAST", SwingConstants.CENTER);
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	  //  c.weightx = 0.3;
 	    c.gridx = 3;
 	    c.gridy = 0;
-	    pane.add(lbl3, c);
+	  //  pane.add(lbl3, c);
             
           
-            btn4 = new JButton("Toggle Blue Sky / Detail");
+            btn4 = new JButton("SPAWN FROM WEST");
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.weightx = 0.5;
 	    c.gridx = 0;
 	    c.gridy = 1;
 	    pane.add(btn4, c);
             
-            btn3 = new JButton("Toggle Blue Sky / Detail");
+            btn3 = new JButton("SPAWN FROM SOUTH");
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.weightx = 0.5;
 	    c.gridx = 1;
 	    c.gridy = 1;
 	    pane.add(btn3, c);
             
-	    btn2 = new JButton("Toggle Blue Sky / Detail");
+	    btn2 = new JButton("SPAWN FROM NORTH");
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.weightx = 0.5;
 	    c.gridx = 2;
 	    c.gridy = 1;
 	    pane.add(btn2, c);
             
-	    btn1 = new JButton("Toggle Blue Sky / Detail");
+	    btn1 = new JButton("SPAWN FROM EAST");
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    c.weightx = 0.5;
 	    c.gridx = 3;
@@ -187,10 +187,44 @@ public class MainWindow{
              btn1.addActionListener(new ActionListener() {
          	    @Override
          	    public void actionPerformed(ActionEvent event) {
-         	       System.out.println("listener button");
-                       paint.SKY = !paint.SKY;
-                       paint.updateValues();
+         	       //System.out.println("listener button");
+                      // paint.SKY = !paint.SKY;
+                      // paint.updateValues();
                        MainAgent.CREATE = true;
+                       MainAgent.CREATEEAST= true;
+                       //MainAgent.createNewVehicle(0,2);
+         	    }
+         	});
+                btn2.addActionListener(new ActionListener() {
+         	    @Override
+         	    public void actionPerformed(ActionEvent event) {
+         	       //System.out.println("listener button");
+                      // paint.SKY = !paint.SKY;
+                      // paint.updateValues();
+                       MainAgent.CREATE = true;
+                       MainAgent.CREATENORTH= true;
+                       //MainAgent.createNewVehicle(0,2);
+         	    }
+         	});
+                btn3.addActionListener(new ActionListener() {
+         	    @Override
+         	    public void actionPerformed(ActionEvent event) {
+         	       //System.out.println("listener button");
+                      // paint.SKY = !paint.SKY;
+                      // paint.updateValues();
+                       MainAgent.CREATE = true;
+                       MainAgent.CREATESOUTH= true;
+                       //MainAgent.createNewVehicle(0,2);
+         	    }
+         	});
+                btn4.addActionListener(new ActionListener() {
+         	    @Override
+         	    public void actionPerformed(ActionEvent event) {
+         	       //System.out.println("listener button");
+                      // paint.SKY = !paint.SKY;
+                      // paint.updateValues();
+                       MainAgent.CREATE = true;
+                       MainAgent.CREATEWEST= true;
                        //MainAgent.createNewVehicle(0,2);
          	    }
          	});
