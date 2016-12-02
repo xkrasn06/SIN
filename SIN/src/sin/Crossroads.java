@@ -64,6 +64,8 @@ public class Crossroads extends Agent{
     public static int crossroadInUseSouth = 0;
     public static AID crossroadsAID;
     
+    public static boolean SMART = false;
+    
      protected void setup() {
          System.out.println("Crosseoads Agent "+ getAID().getName()+ " has started");
          addBehaviour(new CrossroadListener());
@@ -73,7 +75,7 @@ public class Crossroads extends Agent{
         crossroadsAID = getAID();
         addBehaviour(new TickerBehaviour(this, 5000) {
             public void onTick() {
-                   // System.out.println("TICKd" + Crossroads.STATE);
+                 System.out.println("TICKd" + Crossroads.SMART);
                     setZero(); 
                 if (Crossroads.WAIT) {
                     try {

@@ -112,8 +112,8 @@ public class MainWindow{
 	    c.gridy = 0;
 	   // pane.add(lbl2, c);
 	    
-	    box1 = new JCheckBox("Random Angles",true);
-	    box1.setText("< - Random ");
+	    box1 = new JCheckBox("SMART",false);
+	    box1.setText("SMART");
             //box1.turnCheckBox.setSelected(isSelected);
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	  //  c.weightx = 0.2;
@@ -180,7 +180,8 @@ public class MainWindow{
             	    @Override
             	    public void actionPerformed(ActionEvent event) {
             	      // System.out.println("listener checkbox");
-                       paint.updateValues();
+                       Crossroads.SMART = !Crossroads.SMART;
+                       //paint.updateValues();
             	    }
             	});
              
@@ -238,7 +239,7 @@ public class MainWindow{
      */
     private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("FYO - Scattering: Rayleigh, Mie");
+        JFrame frame = new JFrame("SIN - CROSSROADS");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
  
