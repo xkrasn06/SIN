@@ -84,7 +84,7 @@ public class Crossroads extends Agent{
                     setZero(); 
                 if((Crossroads.SMART) && (!Crossroads.SMARTtempOFF)){
                     Crossroads.SMARTcount++;
-                    if (Crossroads.SMARTcount == 3) {
+                    if (Crossroads.SMARTcount == 7) {
                         Crossroads.SMARTtempOFF = true;
                         Crossroads.SMARTcount=0;
                     }
