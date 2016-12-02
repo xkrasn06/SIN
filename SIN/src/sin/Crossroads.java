@@ -123,6 +123,7 @@ public class Crossroads extends Agent{
                     //return;
                 }  
                 if(Crossroads.SMARTtempOFF) {
+                    System.out.println("TEMP OFF");
                     Crossroads.SMARTOffcount++;
                     if (Crossroads.SMARTOffcount == 3) {
                         Crossroads.SMARTtempOFF = false;

@@ -363,7 +363,7 @@ public class CarBehaviour extends CyclicBehaviour {
                         
                     }
                     if (!left)
-                        if(MainAgent.AgentList.get(i).y>MainAgent.SOUTHLINE) {
+                        if(MainAgent.AgentList.get(i).y>MainAgent.SOUTHLINE+10) {
                             Crossroads.crossroadInUseSouth--;
                             left = true;
                         }
@@ -606,7 +606,7 @@ public class CarBehaviour extends CyclicBehaviour {
                     if (red) {
                         if (que<0)
                         que = Crossroads.waitWS++;
-                         if ((newPos > MainAgent.WESTLINE-que*50) && (!passed)) {
+                         if ((newPos > MainAgent.WESTLINE+vertDiff-que*50) && (!passed)) {
                            break;
                         }
                         else  {
