@@ -60,6 +60,8 @@ public class Crossroads extends Agent{
     public static int waitNW= 0;
     public static int waitWS= 0;
     public static int waitEN= 0;
+    public static int crossroadInUseNorth = 0;
+    public static int crossroadInUseSouth = 0;
     public static AID crossroadsAID;
     
      protected void setup() {

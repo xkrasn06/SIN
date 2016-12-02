@@ -33,6 +33,7 @@ public class CarBehaviour extends CyclicBehaviour {
     private boolean sent = false;
     private boolean start = false;
     private boolean red = false;
+    private boolean left = false;
     private int quenum = 0;
     private int quenumStart;
     private int que = -1;
@@ -173,12 +174,20 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                             if(!sent) {
                                 Crossroads.waitSN--;
+                                Crossroads.crossroadInUseNorth++;
                                 sendWelcomeMessage(from,to, false);
                                 sent = true;
                             }
                         }
                         
                     }
+                    if (!left) {
+                     if(MainAgent.AgentList.get(i).y<MainAgent.NORTHLINE) {
+                            
+                                Crossroads.crossroadInUseNorth--;
+                                left = true;
+                            }
+                     }
                     if(MainAgent.AgentList.get(i).y<0)
                             myAgent.doDelete();
                    // break;
@@ -218,12 +227,19 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                             if(!sent) {
                                 Crossroads.waitNS--;
+                                Crossroads.crossroadInUseSouth++;
                                 sendWelcomeMessage(from,to, false);
                                 sent = true;
                             }
                         }
                         
                     }
+                    if (!left)
+                    if(MainAgent.AgentList.get(i).y>MainAgent.SOUTHLINE) {
+                        Crossroads.crossroadInUseSouth--;
+                        left = true;
+                    }
+                            
                     if(MainAgent.AgentList.get(i).y>PaintPanel.downY)
                             myAgent.doDelete();
                    // break;
@@ -271,11 +287,19 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                             if(!sent) {
                                 Crossroads.waitWN--;
+                                Crossroads.crossroadInUseNorth++;
                                 sendWelcomeMessage(from,to, false);
                                 sent = true;
                             }
                         }
                         
+                    }
+                    if (!left) {
+                        if(MainAgent.AgentList.get(i).y<MainAgent.NORTHLINE) {
+                            Crossroads.crossroadInUseNorth--;
+                            left = true;
+                        }
+                           
                     }
                     if(MainAgent.AgentList.get(i).y<0)
                             myAgent.doDelete();
@@ -323,12 +347,19 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                             if(!sent) {
                                 Crossroads.waitES--;
+                                Crossroads.crossroadInUseSouth++;
                                 sendWelcomeMessage(from,to, false);
                                 sent = true;
                             }
                         }
                         
                     }
+                    if (!left)
+                        if(MainAgent.AgentList.get(i).y>MainAgent.SOUTHLINE) {
+                            Crossroads.crossroadInUseSouth--;
+                            left = true;
+                        }
+                            
                     if(MainAgent.AgentList.get(i).y>PaintPanel.downY)
                             myAgent.doDelete();
                    // break;
@@ -559,7 +590,8 @@ public class CarBehaviour extends CyclicBehaviour {
                 if(MainAgent.AgentList.get(i).name.equals(name)) {
                     // pozicia zastavenia ciara krizovatky plus pocet aut
                     int newPos=MainAgent.AgentList.get(i).x+5; //+quenum*50;
-                    if ((Crossroads.getNorthToSouth() == 1) || (Crossroads.getEastToSouth() == 1))  red= true;
+                   // if ((Crossroads.getNorthToSouth() == 1) || (Crossroads.getEastToSouth() == 1))  red= true;
+                    if (Crossroads.crossroadInUseSouth > 0) red = true;
                     else red = false;
                     //if (MainAgent.AgentList.get(i).x > thirdX-vertDiff) passed = true;
                     if (passed) red = false;
@@ -620,7 +652,8 @@ public class CarBehaviour extends CyclicBehaviour {
                 if(MainAgent.AgentList.get(i).name.equals(name)) {
                     // pozicia zastavenia ciara krizovatky plus pocet aut
                     int newPos=MainAgent.AgentList.get(i).x-5; //+quenum*50;
-                    if ((Crossroads.getWestToNorth() == 1) || (Crossroads.getSouthToNorth() == 1))  red= true;
+                   // if ((Crossroads.getWestToNorth() == 1) || (Crossroads.getSouthToNorth() == 1))  red= true;
+                   if (Crossroads.crossroadInUseNorth > 0) red = true;
                     else red = false;
                    // if (MainAgent.AgentList.get(i).x < MainAgent.EASTLINE) passed = true;
                     if (passed) red = false;
