@@ -72,12 +72,20 @@ public class CarBehaviour extends CyclicBehaviour {
                     int newPos=MainAgent.AgentList.get(i).x+5; //+quenum*50;
                     if (Crossroads.getWestToEast() == 0) red= true;
                     else red = false;
-                    if (MainAgent.AgentList.get(i).x > MainAgent.WESTLINE) passed = true;
+                    if (MainAgent.AgentList.get(i).x > MainAgent.WESTLINE) {
+                        passed = true;
+                        if(!sent) {
+                                Crossroads.waitWE--;
+                                sendWelcomeMessage(from,to, false);
+                                sent = true;
+                            }
+                    }
                     if (red) {
                         if (que<0)
                         que = Crossroads.waitWE++;
                          if ((newPos > MainAgent.WESTLINE-que*50) && (!passed)) {
-                           break;
+                          //  System.out.println("wait west" + Crossroads.waitWE);
+                            break;
                         }
                         else  MainAgent.AgentList.get(i).x+=5;
                     }
@@ -591,7 +599,7 @@ public class CarBehaviour extends CyclicBehaviour {
                     // pozicia zastavenia ciara krizovatky plus pocet aut
                     int newPos=MainAgent.AgentList.get(i).x+5; //+quenum*50;
                    // if ((Crossroads.getNorthToSouth() == 1) || (Crossroads.getEastToSouth() == 1))  red= true;
-                    if (Crossroads.crossroadInUseSouth > 0) red = true;
+                    if ((Crossroads.crossroadInUseSouth > 0) && (!passed)) red = true;
                     else red = false;
                     //if (MainAgent.AgentList.get(i).x > thirdX-vertDiff) passed = true;
                     if (passed) red = false;
@@ -624,10 +632,10 @@ public class CarBehaviour extends CyclicBehaviour {
                         /*if((MainAgent.AgentList.get(i).x > MainAgent.WESTLINE) && (MainAgent.AgentList.get(i).x < thirdX+vertDiff*3 ))
                             MainAgent.AgentList.get(i).y-=2;*/
                         
-                        if(MainAgent.AgentList.get(i).x>thirdX+Xdiff-vertDiff*4+5) {
+                        if(MainAgent.AgentList.get(i).x>MainAgent.WESTLINE){ //thirdX+Xdiff-vertDiff*4+5) {
                             passed = true;
                             if(!sent) {
-                                Crossroads.waitWN--;
+                                Crossroads.waitWS--;
                                 sendWelcomeMessage(from,to, false);
                                 sent = true;
                             }
@@ -653,7 +661,7 @@ public class CarBehaviour extends CyclicBehaviour {
                     // pozicia zastavenia ciara krizovatky plus pocet aut
                     int newPos=MainAgent.AgentList.get(i).x-5; //+quenum*50;
                    // if ((Crossroads.getWestToNorth() == 1) || (Crossroads.getSouthToNorth() == 1))  red= true;
-                   if (Crossroads.crossroadInUseNorth > 0) red = true;
+                   if (Crossroads.crossroadInUseNorth > 0 && (!passed)) red = true;
                     else red = false;
                    // if (MainAgent.AgentList.get(i).x < MainAgent.EASTLINE) passed = true;
                     if (passed) red = false;

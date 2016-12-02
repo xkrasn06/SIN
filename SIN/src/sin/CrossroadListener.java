@@ -65,15 +65,15 @@ public class CrossroadListener extends CyclicBehaviour{
                 Crossroads.SouthToWestCarsInc();
                // System.out.println("WESTtoEAST");
             } else
-            if (path.equals("NORHTtoSOUTH")) {
+            if (path.equals("NORTHtoSOUTH")) {
                 Crossroads.NorthToSouthCarsInc();
                // System.out.println("WESTtoEAST");
             } else
-            if (path.equals("NORHTtoEAST")) {
+            if (path.equals("NORTHtoEAST")) {
                 Crossroads.NorthToEastCarsInc();
                // System.out.println("WESTtoEAST");
             } else
-            if (path.equals("NORHTtoWEST")) {
+            if (path.equals("NORTHtoWEST")) {
                 Crossroads.NorthToWestCarsInc();
                // System.out.println("WESTtoEAST");
             } 
@@ -117,15 +117,15 @@ public class CrossroadListener extends CyclicBehaviour{
                 Crossroads.SouthToWestCarsDec();
                // System.out.println("WESTtoEAST");
             } else
-            if (path.equals("NORHTexitSOUTH")) {
+            if (path.equals("NORTHexitSOUTH")) {
                 Crossroads.NorthToSouthCarsDec();
                // System.out.println("WESTtoEAST");
             } else
-            if (path.equals("NORHTexitEAST")) {
+            if (path.equals("NORTHexitEAST")) {
                 Crossroads.NorthToEastCarsDec();
                // System.out.println("WESTtoEAST");
             } else
-            if (path.equals("NORHTexitWEST")) {
+            if (path.equals("NORTHexitWEST")) {
                 Crossroads.NorthToWestCarsDec();
                // System.out.println("WESTtoEAST");
             } 

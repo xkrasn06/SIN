@@ -29,6 +29,8 @@ public class Crossroads extends Agent{
     public static int NORTHtoSOUTH = 0;
     public static int NORTHtoEAST = 0;
     public static int STATE = 0;
+    public static int LASTSTATE = 0;
+    public static int LASTSTATE2 = 0;
     public static boolean WAIT = true;
     
     private boolean crossroadChanged = false;
@@ -65,6 +67,9 @@ public class Crossroads extends Agent{
     public static AID crossroadsAID;
     
     public static boolean SMART = false;
+    public static int SMARTcount = 0;
+    public static int SMARTOffcount = 0;
+    public static boolean SMARTtempOFF = false;
     
      protected void setup() {
          System.out.println("Crosseoads Agent "+ getAID().getName()+ " has started");
@@ -77,7 +82,38 @@ public class Crossroads extends Agent{
             public void onTick() {
                  System.out.println("TICKd" + Crossroads.SMART);
                     setZero(); 
+                if((Crossroads.SMART) && (!Crossroads.SMARTtempOFF)){
+                    Crossroads.SMARTcount++;
+                    if (Crossroads.SMARTcount == 3) {
+                        Crossroads.SMARTtempOFF = true;
+                        Crossroads.SMARTcount=0;
+                    }
+                    int westCars = WESTtoNORTHcars + WESTtoEASTcars + WESTtoSOUTHcars;
+                    int eastCars = EASTtoNORTHcars + EASTtoWESTcars + EASTtoSOUTHcars;
+                    int southCars = SOUTHtoWESTcars + SOUTHtoNORTHcars + SOUTHtoEASTcars;
+                    int northCars = NORTHtoWESTcars + NORTHtoSOUTHcars + NORTHtoEASTcars;
+                    
+                    int maxPos = 0;
+                    int max =Math.max(Math.max(westCars,eastCars),Math.max(southCars,northCars));
+                    if (max == eastCars) maxPos = 1;
+                    else if (max == southCars) maxPos = 2;
+                    else if (max == northCars) maxPos = 3;
+                    
+                    LASTSTATE2 = LASTSTATE;
+                    LASTSTATE = STATE-1;
+                    if (LASTSTATE <0) LASTSTATE = 3;
+                    
+                    if(maxPos != LASTSTATE2) STATE = maxPos;
+                    else STATE = maxPos+1;
+                    
+                    if(STATE == LASTSTATE) Crossroads.WAIT = false;
+                    System.out.println("maxPos " + westCars);
+                    System.out.println("maxPos " + eastCars);
+                    System.out.println("maxPos " + northCars);
+                    System.out.println("maxPos " + southCars);
+                }
                 if (Crossroads.WAIT) {
+                    
                     try {
                         TimeUnit.MILLISECONDS.sleep(3000);
                     } catch (InterruptedException ex) {
@@ -85,16 +121,24 @@ public class Crossroads extends Agent{
                     }
                     Crossroads.WAIT = false;
                     //return;
-                }   
+                }  
+                if(Crossroads.SMARTtempOFF) {
+                    Crossroads.SMARTOffcount++;
+                    if (Crossroads.SMARTOffcount == 3) {
+                        Crossroads.SMARTtempOFF = false;
+                        Crossroads.SMARTOffcount=0;
+                    }
+                }
                 if (Crossroads.STATE == 0) {
                    
-                    Crossroads.WESTtoEAST = Crossroads.WESTtoNORTH = 1;
+                    Crossroads.WESTtoEAST = Crossroads.WESTtoNORTH = Crossroads.NORTHtoWEST = 1;
                     Crossroads.STATE = 1;
                     Crossroads.WAIT = true;
                 } else
                 if (Crossroads.STATE == 1) {
                    // System.out.println("TICKdfwaeaw");
-                    Crossroads.EASTtoWEST = Crossroads.EASTtoSOUTH = 1;
+                    Crossroads.EASTtoWEST = Crossroads.EASTtoSOUTH = Crossroads.SOUTHtoEAST = 1;
+                    
                     Crossroads.STATE = 2;
                      Crossroads.WAIT = true;
                 } else
