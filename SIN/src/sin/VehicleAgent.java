@@ -30,6 +30,7 @@ public class VehicleAgent extends Agent {
           int from = (int) args[0];
           int to = (int) args[1];
           int type = (int) args[2];
+          boolean bus = (boolean) args[3];
          // System.out.println("Vehicle Agent path "+ from + to);
           
        //  System.out.println("True "+ from + to);
@@ -74,10 +75,10 @@ public class VehicleAgent extends Agent {
          }
          AID s = getAID();
          MainAgent.AgentListElement a;
-         a = new MainAgent.AgentListElement(x,y,type,s);
+         a = new MainAgent.AgentListElement(x,y,type,s,bus);
          MainAgent.AgentList.add(a);
-         sendWelcomeMessage(from,to, true);
-         addBehaviour(new CarBehaviour(s, from, to));
+         sendWelcomeMessage(from,to, true, bus);
+         addBehaviour(new CarBehaviour(s, from, to, bus));
          
           
     }
@@ -98,11 +99,13 @@ public class VehicleAgent extends Agent {
       //  System.out.println("Vehicle Agent "+ getAID().getName()+ " has terminated"); 
     }
     
-    public void sendWelcomeMessage(int from, int to, boolean dir) {
+    public void sendWelcomeMessage(int from, int to, boolean dir, boolean bus) {
         
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.addReceiver(Crossroads.crossroadsAID);
         String fromS = null, toS = null;
+        if (bus) msg.setLanguage("bus"); 
+        else msg.setLanguage("nobus");
         if (from == MainAgent.WEST)
             fromS = "WEST";
         else if (from == MainAgent.NORTH)
@@ -120,9 +123,15 @@ public class VehicleAgent extends Agent {
             toS = "EAST";
         else if (to == MainAgent.SOUTH)
             toS = "SOUTH";
-        if (dir==true)
+        if (dir==true) {
+           
             msg.setContent(fromS+"to"+toS);
-        else msg.setContent(fromS+"exit"+toS);
+        }
+        else {
+            
+           
+           msg.setContent(fromS+"exit"+toS);
+        }
         send(msg);
     }
 }

@@ -28,6 +28,7 @@ public class CarBehaviour extends CyclicBehaviour {
     private int from;
     private int to;
     private final AID name;
+    private boolean bus;
     private boolean stopped = false;
     private boolean passed = false;
     private boolean sent = false;
@@ -38,10 +39,11 @@ public class CarBehaviour extends CyclicBehaviour {
     private int quenumStart;
     private int que = -1;
     private boolean turned = false;
-    public CarBehaviour(AID name, int from, int to) {
+    public CarBehaviour(AID name, int from, int to, boolean bus) {
        this.name = name;
        this.from = from;
        this.to = to;
+       this.bus = bus;
        
     }
     @Override
@@ -57,8 +59,9 @@ public class CarBehaviour extends CyclicBehaviour {
         else {
           
         }
-       if(from==MainAgent.WEST && to==MainAgent.EAST) {
         
+       if(from==MainAgent.WEST && to==MainAgent.EAST) {
+           
             try {
                 TimeUnit.MILLISECONDS.sleep(50);
             } catch (InterruptedException ex) {
@@ -76,7 +79,7 @@ public class CarBehaviour extends CyclicBehaviour {
                         passed = true;
                         if(!sent) {
                                 Crossroads.waitWE--;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
                     }
@@ -95,7 +98,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                             if(!sent) {
                                 Crossroads.waitWE--;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
                         }
@@ -137,7 +140,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                             if(!sent) {
                                 Crossroads.waitEW--;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
                         }
@@ -183,7 +186,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             if(!sent) {
                                 Crossroads.waitSN--;
                                 Crossroads.crossroadInUseNorth++;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
                         }
@@ -236,7 +239,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             if(!sent) {
                                 Crossroads.waitNS--;
                                 Crossroads.crossroadInUseSouth++;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
                         }
@@ -296,7 +299,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             if(!sent) {
                                 Crossroads.waitWN--;
                                 Crossroads.crossroadInUseNorth++;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
                         }
@@ -356,7 +359,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             if(!sent) {
                                 Crossroads.waitES--;
                                 Crossroads.crossroadInUseSouth++;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
                         }
@@ -414,7 +417,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                             if(!sent) {
                                 Crossroads.waitSW--;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
                         }
@@ -466,7 +469,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                             if(!sent) {
                                 Crossroads.waitSE--;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
                         }
@@ -520,7 +523,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                             if(!sent) {
                                 Crossroads.waitNE--;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
                         }
@@ -574,7 +577,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                             if(!sent) {
                                 Crossroads.waitNW--;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
                         }
@@ -636,7 +639,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                             if(!sent) {
                                 Crossroads.waitWS--;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false, bus);
                                 sent = true;
                             }
                         }
@@ -696,7 +699,7 @@ public class CarBehaviour extends CyclicBehaviour {
                             passed = true;
                             if(!sent) {
                                 Crossroads.waitEN--;
-                                sendWelcomeMessage(from,to, false);
+                                sendWelcomeMessage(from,to, false, bus);
                                 sent = true;
                             }
                         }
@@ -723,11 +726,13 @@ public class CarBehaviour extends CyclicBehaviour {
         
     }
     
-    public void sendWelcomeMessage(int from, int to, boolean dir) {
+    public void sendWelcomeMessage(int from, int to, boolean dir, boolean bus) {
         
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.addReceiver(Crossroads.crossroadsAID);
         String fromS = null, toS = null;
+        if (bus) msg.setLanguage("bus"); 
+        else msg.setLanguage("nobus");
         if (from == MainAgent.WEST)
             fromS = "WEST";
         else if (from == MainAgent.NORTH)

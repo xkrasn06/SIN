@@ -56,13 +56,15 @@ public class MainAgent extends Agent{
             public int y;
             public int type;
             public AID name;
+            public boolean bus = false;
             
             
-            public AgentListElement(int x, int y, int type, AID name) {
+            public AgentListElement(int x, int y, int type, AID name, boolean bus) {
                 this.x=x;
                 this.y=y;
                 this.type=type;
                 this.name=name;
+                this.bus = bus;
             }
         }
         public static ArrayList<AgentListElement> AgentList = new ArrayList<AgentListElement>(); 
@@ -146,7 +148,9 @@ public class MainAgent extends Agent{
                     
                     if ((endpointFromName==MainAgent.SOUTH) || (endpointFromName==MainAgent.NORTH))
                         type = 1;
-                    Object args[] = { endpointFromName, endpointToName, type};
+                    boolean bus = false;
+                    if (randomInt > 95) bus = true;
+                    Object args[] = { endpointFromName, endpointToName, type, bus};
                 
                     try {   
                         AgentController agent = carAgentContainer.createNewAgent("car-" + vehicleAgents, VehicleAgent.class.getCanonicalName(), args);
@@ -171,7 +175,7 @@ public class MainAgent extends Agent{
                     Object args[] = { endpointFromName, endpointToName, type};
                 
                     try {   
-                        AgentController agent = carAgentContainer.createNewAgent("C-" + vehicleAgents, VehicleAgent.class.getCanonicalName(), args);
+                        AgentController agent = carAgentContainer.createNewAgent("car-" + vehicleAgents, VehicleAgent.class.getCanonicalName(), args);
                         agent.start();
                         vehicleAgents++;
                     } catch (StaleProxyException e) {
