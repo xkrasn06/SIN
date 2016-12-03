@@ -26,7 +26,7 @@ public class CrossroadListener extends CyclicBehaviour{
         if (msg != null) {
             String title = msg.getLanguage();
             String path = msg.getContent();
-            System.out.println(path);
+           // System.out.println(path);
             if (path.equals("WESTtoEAST")) {
                 Crossroads.WestToEastCarsInc();
                 //System.out.println("WESTtoEAST");

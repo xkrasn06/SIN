@@ -25,14 +25,14 @@ public class VehicleAgent extends Agent {
     private String name;
     
     protected void setup() {
-          System.out.println("Vehicle Agent "+ getAID().getName()+ " has started");
+      //    System.out.println("Vehicle Agent "+ getAID().getName()+ " has started");
           Object[] args = getArguments();
           int from = (int) args[0];
           int to = (int) args[1];
           int type = (int) args[2];
-          System.out.println("Vehicle Agent path "+ from + to);
+         // System.out.println("Vehicle Agent path "+ from + to);
           
-         System.out.println("True "+ from + to);
+       //  System.out.println("True "+ from + to);
          int x =0,y=0;
          if((from == MainAgent.EAST) && (to==MainAgent.WEST)) {      
                 x = PaintPanel.fifthX-80;
@@ -83,19 +83,19 @@ public class VehicleAgent extends Agent {
     }
     
     protected void takeDown() {
-         for (int i = 0; i < MainAgent.AgentList.size(); i++) {
+      /*   for (int i = 0; i < MainAgent.AgentList.size(); i++) {
               System.out.println("WRITING " + MainAgent.AgentList.get(i).name);
-         }
+         }*/
             
         for (int i = 0; i < MainAgent.AgentList.size(); i++) {
-             System.out.println("DESTROYING " + getAID().getName());
+      //       System.out.println("DESTROYING " + getAID().getName());
             if(MainAgent.AgentList.get(i).name.equals(getAID().getName())) {
                 MainAgent.AgentList.remove(i);
-                System.out.println("DESTROYED "+getAID().getName());
+         //       System.out.println("DESTROYED "+getAID().getName());
                 break;
             }
 	}
-        System.out.println("Vehicle Agent "+ getAID().getName()+ " has terminated"); 
+      //  System.out.println("Vehicle Agent "+ getAID().getName()+ " has terminated"); 
     }
     
     public void sendWelcomeMessage(int from, int to, boolean dir) {

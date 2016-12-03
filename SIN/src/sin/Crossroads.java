@@ -72,7 +72,7 @@ public class Crossroads extends Agent{
     public static boolean SMARTtempOFF = false;
     
      protected void setup() {
-         System.out.println("Crosseoads Agent "+ getAID().getName()+ " has started");
+        // System.out.println("Crosseoads Agent "+ getAID().getName()+ " has started");
          addBehaviour(new CrossroadListener());
          
        //  addBehaviour(new CrossroadController());
@@ -123,7 +123,18 @@ public class Crossroads extends Agent{
                     if (LASTSTATE <0) LASTSTATE = 3;
                     
                     if(maxPos != LASTSTATE2) STATE = maxPos;
-                    else STATE = maxPos+1;
+                    else  {
+                        int max;
+                        if (maxPos>0) max = 0;
+                        else max = 1;
+                        for(int i = 0; i < numbers.length; i++) {
+                            if(numbers[i] > numbers[max]) {
+                                if (i != maxPos) max = i;
+                            }
+                        
+                        }
+                        STATE = max;
+                    }
                     
                     if(STATE == LASTSTATE) Crossroads.WAIT = false;
                     System.out.println("maxPos " + westCars);
@@ -371,6 +382,6 @@ public class Crossroads extends Agent{
      }
      
      protected void takeDown() {
-        System.out.println("Crossroads "+ getAID().getName()+ " has terminated"); 
+       // System.out.println("Crossroads "+ getAID().getName()+ " has terminated"); 
     }
 }

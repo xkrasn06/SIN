@@ -67,7 +67,7 @@ public class MainAgent extends Agent{
         }
         public static ArrayList<AgentListElement> AgentList = new ArrayList<AgentListElement>(); 
     protected void setup() {
-            System.out.println("MainAgent "+ getAID().getName()+ " has started");
+          //  System.out.println("MainAgent "+ getAID().getName()+ " has started");
             String s= getAID().getName();
             System.out.println(s);
             Profile p = new ProfileImpl();
@@ -91,7 +91,7 @@ public class MainAgent extends Agent{
     
    
     protected void takeDown() {
-        System.out.println("MainAgent "+ getAID().getName()+ " has terminated"); 
+       // System.out.println("MainAgent "+ getAID().getName()+ " has terminated"); 
     }
     
     public static void setPanel(PaintPanel p) {
