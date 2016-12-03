@@ -80,7 +80,7 @@ public class Crossroads extends Agent{
         crossroadsAID = getAID();
         addBehaviour(new TickerBehaviour(this, 5000) {
             public void onTick() {
-                 System.out.println("TICKd" + Crossroads.SMART);
+                 //System.out.println("TICKd" + Crossroads.SMART);
                     setZero(); 
                 if((Crossroads.SMART) && (!Crossroads.SMARTtempOFF)){
                     Crossroads.SMARTcount++;
@@ -92,12 +92,31 @@ public class Crossroads extends Agent{
                     int eastCars = EASTtoNORTHcars + EASTtoWESTcars + EASTtoSOUTHcars;
                     int southCars = SOUTHtoWESTcars + SOUTHtoNORTHcars + SOUTHtoEASTcars;
                     int northCars = NORTHtoWESTcars + NORTHtoSOUTHcars + NORTHtoEASTcars;
+                    int[] numbers = new int[12];
+                    numbers[0] = westCars;
+                    numbers[1] = eastCars;
+                    numbers[2] = southCars;
+                    numbers[3] = northCars;
+                    numbers[4] = WESTtoNORTHcars + NORTHtoWESTcars + EASTtoSOUTHcars;
+                    numbers[5] = WESTtoEASTcars+EASTtoWESTcars;
+                    numbers[6] = EASTtoSOUTHcars + SOUTHtoEASTcars + WESTtoNORTHcars + NORTHtoWESTcars;
+                    numbers[7] = SOUTHtoNORTHcars + NORTHtoWESTcars + SOUTHtoEASTcars;
+                    numbers[8] = SOUTHtoNORTHcars + SOUTHtoEASTcars + NORTHtoWESTcars;
+                    numbers[9] = SOUTHtoWESTcars + NORTHtoEASTcars;
+                    numbers[10] = NORTHtoSOUTHcars+SOUTHtoNORTHcars + NORTHtoWESTcars + SOUTHtoEASTcars;
+                    numbers[11] = NORTHtoWESTcars + WESTtoNORTHcars + SOUTHtoEASTcars;
                     
                     int maxPos = 0;
-                    int max =Math.max(Math.max(westCars,eastCars),Math.max(southCars,northCars));
+                   /* int max =Math.max(Math.max(westCars,eastCars),Math.max(southCars,northCars));
                     if (max == eastCars) maxPos = 1;
                     else if (max == southCars) maxPos = 2;
-                    else if (max == northCars) maxPos = 3;
+                    else if (max == northCars) maxPos = 3;*/
+                   
+                    for(int i = 0; i < numbers.length; i++) {
+                        if(numbers[i] > numbers[maxPos]) {
+                            maxPos = i;
+                        }
+                    }
                     
                     LASTSTATE2 = LASTSTATE;
                     LASTSTATE = STATE-1;
@@ -152,7 +171,65 @@ public class Crossroads extends Agent{
                 if (Crossroads.STATE == 3) {
                     //System.out.println("TICKdfwaeaw");
                     Crossroads.NORTHtoWEST = Crossroads.NORTHtoSOUTH = Crossroads.NORTHtoEAST = 1;
+                    if (!Crossroads.SMART) Crossroads.STATE = 0;
+                    else Crossroads.STATE = 4;
+                    Crossroads.WAIT = true;
+                } else
+                if (Crossroads.STATE == 4) {
+                    //System.out.println("TICKdfwaeaw");
+                    Crossroads.NORTHtoWEST = Crossroads.WESTtoNORTH = Crossroads.EASTtoSOUTH = 1;
+                    if (!Crossroads.SMART) Crossroads.STATE = 0;
+                    else Crossroads.STATE = 5;
+                    Crossroads.WAIT = true;
+                }
+                else
+                if (Crossroads.STATE == 5) {
+                    //System.out.println("TICKdfwaeaw");
+                    Crossroads.WESTtoEAST = Crossroads.EASTtoWEST = 1;
+                    if (!Crossroads.SMART) Crossroads.STATE = 0;
+                    else Crossroads.STATE = 6;
+                    Crossroads.WAIT = true;
+                } else
+                if (Crossroads.STATE == 6) {
+                    //System.out.println("TICKdfwaeaw");
+                    Crossroads.EASTtoSOUTH = Crossroads.SOUTHtoEAST = Crossroads.WESTtoNORTH = Crossroads.NORTHtoWEST = 1;
+                    if (!Crossroads.SMART) Crossroads.STATE = 0;
+                    else Crossroads.STATE = 7;
+                    Crossroads.WAIT = true;
+                } else
+                if (Crossroads.STATE == 7) {
+                    //System.out.println("TICKdfwaeaw");
+                    Crossroads.SOUTHtoNORTH = Crossroads.NORTHtoWEST = Crossroads.SOUTHtoEAST = 1;
+                    if (!Crossroads.SMART) Crossroads.STATE = 0;
+                    else Crossroads.STATE = 8;
+                    Crossroads.WAIT = true;
+                } else
+                if (Crossroads.STATE == 8) {
+                    //System.out.println("TICKdfwaeaw");
+                    Crossroads.SOUTHtoNORTH = Crossroads.SOUTHtoEAST = Crossroads.NORTHtoWEST = 1;
+                    if (!Crossroads.SMART) Crossroads.STATE = 0;
+                    else Crossroads.STATE = 9;
+                    Crossroads.WAIT = true;
+                } else
+                if (Crossroads.STATE == 9) {
+                    //System.out.println("TICKdfwaeaw");
+                    Crossroads.SOUTHtoWEST = Crossroads.NORTHtoEAST = 1;
+                    if (!Crossroads.SMART) Crossroads.STATE = 0;
+                    else Crossroads.STATE = 10;
+                    Crossroads.WAIT = true;
+                } else
+                if (Crossroads.STATE == 10) {
+                    //System.out.println("TICKdfwaeaw");
+                    Crossroads.NORTHtoSOUTH = Crossroads.SOUTHtoNORTH = Crossroads.NORTHtoWEST = Crossroads.SOUTHtoEAST =1;
+                    if (!Crossroads.SMART) Crossroads.STATE = 0;
+                    else Crossroads.STATE = 11;
+                    Crossroads.WAIT = true;
+                } else
+                if (Crossroads.STATE == 11) {
+                    //System.out.println("TICKdfwaeaw");
+                    Crossroads.NORTHtoWEST = Crossroads.WESTtoNORTH = Crossroads.SOUTHtoEAST = 1;
                     Crossroads.STATE = 0;
+                   
                     Crossroads.WAIT = true;
                 }
                 //System.out.println("TICKed" + Crossroads.EASTtoWEST);
