@@ -172,7 +172,8 @@ public class MainAgent extends Agent{
             @Override
             public void action() {
                     int type = 0;
-                    Object args[] = { endpointFromName, endpointToName, type};
+                     boolean bus = false;
+                    Object args[] = { endpointFromName, endpointToName, type,bus};
                 
                     try {   
                         AgentController agent = carAgentContainer.createNewAgent("car-" + vehicleAgents, VehicleAgent.class.getCanonicalName(), args);

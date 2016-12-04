@@ -75,19 +75,28 @@ public class CarBehaviour extends CyclicBehaviour {
                     int newPos=MainAgent.AgentList.get(i).x+5; //+quenum*50;
                     if (Crossroads.getWestToEast() == 0) red= true;
                     else red = false;
-                    if (MainAgent.AgentList.get(i).x > MainAgent.WESTLINE) {
+                  /*  if (MainAgent.AgentList.get(i).x > MainAgent.WESTLINE) {
                         passed = true;
                         if(!sent) {
-                                Crossroads.waitWE--;
+                                if(stopped) {
+                                    Crossroads.waitWE--;
+                                    stopped = false;
+                                }
                                 sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
-                    }
+                    }*/
                     if (red) {
+                        stopped = true;
+                        
+                        if (Crossroads.waitWE>Crossroads.getWEcars()) Crossroads.waitWE = Crossroads.getWEcars();
                         if (que<0)
                         que = Crossroads.waitWE++;
+                       // if (que>Crossroads.getWEcars()) que--;
+                        
                          if ((newPos > MainAgent.WESTLINE-que*50) && (!passed)) {
                           //  System.out.println("wait west" + Crossroads.waitWE);
+                          System.out.println(MainAgent.AgentList.get(i).name+" " + Crossroads.waitWE );
                             break;
                         }
                         else  MainAgent.AgentList.get(i).x+=5;
@@ -97,7 +106,12 @@ public class CarBehaviour extends CyclicBehaviour {
                         if(MainAgent.AgentList.get(i).x>MainAgent.WESTLINE) {
                             passed = true;
                             if(!sent) {
-                                Crossroads.waitWE--;
+                                if(stopped) { 
+                                    System.out.println(MainAgent.AgentList.get(i).name+" " + Crossroads.waitWE );
+                                    Crossroads.waitWE--;
+                                    if ( Crossroads.waitWE<0)  Crossroads.waitWE = 0;
+                                    stopped = false;
+                                }
                                 sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }

@@ -376,6 +376,9 @@ public class Crossroads extends Agent{
      public static void NorthToWestCarsDec() {
          Crossroads.NORTHtoWESTcars--;
      }
+     public static int getWEcars(){
+         return WESTtoEASTcars;
+     }
      
      public AID getAI() {
          return getAID();
