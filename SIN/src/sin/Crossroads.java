@@ -379,6 +379,46 @@ public class Crossroads extends Agent{
      public static int getWEcars(){
          return WESTtoEASTcars;
      }
+     public static int getEWcars(){
+         return EASTtoWESTcars;
+     } 
+      public static int getSNcars(){
+         return SOUTHtoNORTHcars;
+     }
+     public static int getNScars(){
+         return NORTHtoSOUTHcars;
+     }
+      public static int getWNcars(){
+         return WESTtoNORTHcars;
+     }
+     
+      public static int getEScars(){
+         return EASTtoSOUTHcars;
+     }
+     
+     public static int getSWcars(){
+         return SOUTHtoWESTcars;
+     }
+     
+     public static int getSEcars(){
+         return SOUTHtoEASTcars;
+     }
+     
+     public static int getNEcars(){
+         return NORTHtoEASTcars;
+     }
+     
+      public static int getNWcars(){
+         return NORTHtoWESTcars;
+     }
+      
+     public static int getWScars(){
+         return WESTtoSOUTHcars;
+     }
+     
+    public static int getENcars(){
+         return EASTtoNORTHcars;
+     }
      
      public AID getAI() {
          return getAID();

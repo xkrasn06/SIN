@@ -96,7 +96,7 @@ public class CarBehaviour extends CyclicBehaviour {
                         
                          if ((newPos > MainAgent.WESTLINE-que*50) && (!passed)) {
                           //  System.out.println("wait west" + Crossroads.waitWE);
-                          System.out.println(MainAgent.AgentList.get(i).name+" " + Crossroads.waitWE );
+                         // System.out.println(MainAgent.AgentList.get(i).name+" " + Crossroads.waitWE );
                             break;
                         }
                         else  MainAgent.AgentList.get(i).x+=5;
@@ -141,6 +141,8 @@ public class CarBehaviour extends CyclicBehaviour {
                     else red = false;
                     if (MainAgent.AgentList.get(i).x < MainAgent.EASTLINE) passed = true;
                     if (red) {
+                         stopped = true;
+                        if (Crossroads.waitEW>Crossroads.getEWcars()) Crossroads.waitEW = Crossroads.getEWcars();
                         if (que<0)
                         que = Crossroads.waitEW++;
                          if ((newPos < MainAgent.EASTLINE+que*50) && (!passed)) {
@@ -153,7 +155,12 @@ public class CarBehaviour extends CyclicBehaviour {
                         if(MainAgent.AgentList.get(i).x<MainAgent.EASTLINE) {
                             passed = true;
                             if(!sent) {
-                                Crossroads.waitEW--;
+                                if(stopped) { 
+                                  
+                                    Crossroads.waitEW--;
+                                    if ( Crossroads.waitEW<0)  Crossroads.waitEW = 0;
+                                    stopped = false;
+                                }
                                 sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
@@ -184,6 +191,8 @@ public class CarBehaviour extends CyclicBehaviour {
                     if (MainAgent.AgentList.get(i).y < MainAgent.SOUTHLINE) passed = true;
                      if (passed) red = false;
                     if (red) {
+                         stopped = true;
+                        if (Crossroads.waitSN>Crossroads.getSNcars()) Crossroads.waitSN = Crossroads.getSNcars();
                         if (que<0)
                         que = Crossroads.waitSN++;
                          if ((newPos < MainAgent.SOUTHLINE+que*50) && (!passed)) {
@@ -198,7 +207,13 @@ public class CarBehaviour extends CyclicBehaviour {
                         if(MainAgent.AgentList.get(i).y<MainAgent.SOUTHLINE) {
                             passed = true;
                             if(!sent) {
-                                Crossroads.waitSN--;
+                                 if(stopped) { 
+                                  
+                                     Crossroads.waitSN--;
+                                    if ( Crossroads.waitSN<0)  Crossroads.waitSN = 0;
+                                    stopped = false;
+                                }
+                               
                                 Crossroads.crossroadInUseNorth++;
                                 sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
@@ -237,6 +252,8 @@ public class CarBehaviour extends CyclicBehaviour {
                     if (MainAgent.AgentList.get(i).y > MainAgent.NORTHLINE) passed = true;
                     if (passed) red = false;
                     if (red) {
+                         stopped = true;
+                         if (Crossroads.waitNS>Crossroads.getNScars()) Crossroads.waitNS = Crossroads.getNScars();
                         if (que<0)
                         que = Crossroads.waitNS++;
                          if ((newPos > MainAgent.NORTHLINE-que*50) && (!passed)) {
@@ -251,7 +268,14 @@ public class CarBehaviour extends CyclicBehaviour {
                         if(MainAgent.AgentList.get(i).y>MainAgent.NORTHLINE) {
                             passed = true;
                             if(!sent) {
-                                Crossroads.waitNS--;
+                                
+                                if(stopped) { 
+                                  
+                                      Crossroads.waitNS--;
+                                    if ( Crossroads.waitNS<0)  Crossroads.waitNS = 0;
+                                    stopped = false;
+                                }
+                               
                                 Crossroads.crossroadInUseSouth++;
                                 sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
@@ -288,6 +312,8 @@ public class CarBehaviour extends CyclicBehaviour {
                     if (MainAgent.AgentList.get(i).x > MainAgent.WESTLINE) passed = true;
                     if (passed) red = false;
                     if (red) {
+                         stopped = true;
+                         if (Crossroads.waitWN>Crossroads.getWNcars()) Crossroads.waitWN = Crossroads.getWNcars();
                         if (que<0)
                         que = Crossroads.waitWN++;
                          if ((newPos > MainAgent.WESTLINE-que*50) && (!passed)) {
@@ -311,7 +337,13 @@ public class CarBehaviour extends CyclicBehaviour {
                         if(MainAgent.AgentList.get(i).x>MainAgent.WESTLINE) {
                             passed = true;
                             if(!sent) {
-                                Crossroads.waitWN--;
+                                if(stopped) { 
+                                  
+                                     Crossroads.waitWN--;
+                                    if ( Crossroads.waitWN<0)  Crossroads.waitWN = 0;
+                                    stopped = false;
+                                }
+                                
                                 Crossroads.crossroadInUseNorth++;
                                 sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
@@ -349,6 +381,8 @@ public class CarBehaviour extends CyclicBehaviour {
                     if (MainAgent.AgentList.get(i).x < MainAgent.EASTLINE) passed = true;
                     if (passed) red = false;
                     if (red) {
+                         stopped = true;
+                          if (Crossroads.waitES>Crossroads.getEScars()) Crossroads.waitES = Crossroads.getEScars();
                         if (que<0)
                         que = Crossroads.waitES++;
                          if ((newPos < MainAgent.EASTLINE+que*50) && (!passed)) {
@@ -371,7 +405,13 @@ public class CarBehaviour extends CyclicBehaviour {
                         if(MainAgent.AgentList.get(i).x<MainAgent.EASTLINE) {
                             passed = true;
                             if(!sent) {
-                                Crossroads.waitES--;
+                                if(stopped) { 
+                                  
+                                      Crossroads.waitES--;
+                                    if ( Crossroads.waitES<0)  Crossroads.waitES = 0;
+                                    stopped = false;
+                                }
+                               
                                 Crossroads.crossroadInUseSouth++;
                                 sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
@@ -408,6 +448,8 @@ public class CarBehaviour extends CyclicBehaviour {
                     if (MainAgent.AgentList.get(i).y < MainAgent.SOUTHLINE) passed = true;
                     if (passed) red=false;
                     if (red) {
+                         stopped = true;
+                        if (Crossroads.waitSW>Crossroads.getSWcars()) Crossroads.waitSW = Crossroads.getSWcars();
                         if (que<0)
                         que = Crossroads.waitSW++;
                          if ((newPos < MainAgent.SOUTHLINE+que*50) && (!passed)) {
@@ -430,7 +472,13 @@ public class CarBehaviour extends CyclicBehaviour {
                         if(MainAgent.AgentList.get(i).y<MainAgent.SOUTHLINE) {
                             passed = true;
                             if(!sent) {
-                                Crossroads.waitSW--;
+                                if(stopped) { 
+                                  
+                                      Crossroads.waitSW--;
+                                    if ( Crossroads.waitSW<0)  Crossroads.waitSW = 0;
+                                    stopped = false;
+                                }
+                                
                                 sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
@@ -460,6 +508,8 @@ public class CarBehaviour extends CyclicBehaviour {
                     if (MainAgent.AgentList.get(i).y < MainAgent.SOUTHLINE) passed = true;
                     if (passed) red=false;
                     if (red) {
+                         stopped = true;
+                         if (Crossroads.waitSE>Crossroads.getSEcars()) Crossroads.waitSE = Crossroads.getSEcars();
                         if (que<0)
                         que = Crossroads.waitSE++;
                          if ((newPos < MainAgent.SOUTHLINE+que*50) && (!passed)) {
@@ -482,7 +532,13 @@ public class CarBehaviour extends CyclicBehaviour {
                         if(MainAgent.AgentList.get(i).y<MainAgent.SOUTHLINE) {
                             passed = true;
                             if(!sent) {
-                                Crossroads.waitSE--;
+                                if(stopped) { 
+                                  
+                                      Crossroads.waitSE--;
+                                    if ( Crossroads.waitSE<0)  Crossroads.waitSE = 0;
+                                    stopped = false;
+                                }
+                                
                                 sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
@@ -513,6 +569,8 @@ public class CarBehaviour extends CyclicBehaviour {
                     if (MainAgent.AgentList.get(i).y > MainAgent.NORTHLINE) passed = true;
                     if (passed) red = false;
                     if (red) {
+                         stopped = true;
+                         if (Crossroads.waitNE>Crossroads.getNEcars()) Crossroads.waitNE = Crossroads.getNEcars();
                         if (que<0)
                         que = Crossroads.waitNE++;
                          if ((newPos > MainAgent.NORTHLINE-que*50) && (!passed)) {
@@ -536,7 +594,13 @@ public class CarBehaviour extends CyclicBehaviour {
                         if(MainAgent.AgentList.get(i).y>MainAgent.NORTHLINE) {
                             passed = true;
                             if(!sent) {
-                                Crossroads.waitNE--;
+                                 if(stopped) { 
+                                  
+                                       Crossroads.waitNE--;
+                                    if ( Crossroads.waitNE<0)  Crossroads.waitNE = 0;
+                                    stopped = false;
+                                }
+                              
                                 sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
@@ -567,6 +631,8 @@ public class CarBehaviour extends CyclicBehaviour {
                     if (MainAgent.AgentList.get(i).y > MainAgent.NORTHLINE) passed = true;
                     if (passed) red = false;
                     if (red) {
+                         stopped = true;
+                        if (Crossroads.waitNW>Crossroads.getNWcars()) Crossroads.waitNW = Crossroads.getNWcars();
                         if (que<0)
                         que = Crossroads.waitNW++;
                          if ((newPos > MainAgent.NORTHLINE-que*50) && (!passed)) {
@@ -590,7 +656,13 @@ public class CarBehaviour extends CyclicBehaviour {
                         if(MainAgent.AgentList.get(i).y>MainAgent.NORTHLINE) {
                             passed = true;
                             if(!sent) {
-                                Crossroads.waitNW--;
+                                if(stopped) { 
+                                  
+                                        Crossroads.waitNW--;
+                                    if ( Crossroads.waitNW<0)  Crossroads.waitNW = 0;
+                                    stopped = false;
+                                }
+                               
                                 sendWelcomeMessage(from,to, false,bus);
                                 sent = true;
                             }
@@ -621,6 +693,8 @@ public class CarBehaviour extends CyclicBehaviour {
                     //if (MainAgent.AgentList.get(i).x > thirdX-vertDiff) passed = true;
                     if (passed) red = false;
                     if (red) {
+                         stopped = true;
+                         if (Crossroads.waitWS>Crossroads.getWScars()) Crossroads.waitWS = Crossroads.getWScars();
                         if (que<0)
                         que = Crossroads.waitWS++;
                          if ((newPos > MainAgent.WESTLINE+vertDiff-que*50) && (!passed)) {
@@ -652,6 +726,12 @@ public class CarBehaviour extends CyclicBehaviour {
                         if(MainAgent.AgentList.get(i).x>MainAgent.WESTLINE){ //thirdX+Xdiff-vertDiff*4+5) {
                             passed = true;
                             if(!sent) {
+                                if(stopped) { 
+                                  
+                                        Crossroads.waitWS--;
+                                    if ( Crossroads.waitWS<0)  Crossroads.waitWS = 0;
+                                    stopped = false;
+                                }
                                 Crossroads.waitWS--;
                                 sendWelcomeMessage(from,to, false, bus);
                                 sent = true;
@@ -683,6 +763,8 @@ public class CarBehaviour extends CyclicBehaviour {
                    // if (MainAgent.AgentList.get(i).x < MainAgent.EASTLINE) passed = true;
                     if (passed) red = false;
                     if (red) {
+                         stopped = true;
+                        if (Crossroads.waitEN>Crossroads.getENcars()) Crossroads.waitEN = Crossroads.getENcars();
                         if (que<0)
                         que = Crossroads.waitEN++;
                          if ((newPos < MainAgent.EASTLINE+que*50) && (!passed)) {
@@ -712,7 +794,13 @@ public class CarBehaviour extends CyclicBehaviour {
                         if(MainAgent.AgentList.get(i).x<PaintPanel.thirdX+Xdiff) {
                             passed = true;
                             if(!sent) {
-                                Crossroads.waitEN--;
+                                if(stopped) { 
+                                  
+                                        Crossroads.waitEN--;
+                                    if ( Crossroads.waitEN<0)  Crossroads.waitEN = 0;
+                                    stopped = false;
+                                }
+                                
                                 sendWelcomeMessage(from,to, false, bus);
                                 sent = true;
                             }
