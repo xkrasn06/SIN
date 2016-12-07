@@ -7,7 +7,6 @@ package sin;
 
 import jade.core.AID;
 import jade.core.Agent;
-import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.TickerBehaviour;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -18,6 +17,8 @@ import java.util.logging.Logger;
  * @author Milan
  */
 public class Crossroads extends Agent{
+    
+    // mnoho premennych pre pocitanie najlepsieho stavu krizovatky
     public static int WESTtoEAST = 0;
     public static int WESTtoNORTH = 0;
     public static int EASTtoWEST = 0;
@@ -33,7 +34,7 @@ public class Crossroads extends Agent{
     public static int LASTSTATE2 = 0;
     public static boolean WAIT = true;
     
-    private boolean crossroadChanged = false;
+    
     private static int WESTtoEASTcars = 0;
     private static int WESTtoNORTHcars= 0;
     private static int WESTtoSOUTHcars= 0;
@@ -71,6 +72,10 @@ public class Crossroads extends Agent{
     public static int SMARTOffcount = 0;
     public static boolean SMARTtempOFF = false;
     
+    /**
+     *
+     */
+    @Override
      protected void setup() {
         // System.out.println("Crosseoads Agent "+ getAID().getName()+ " has started");
          addBehaviour(new CrossroadListener());
@@ -79,15 +84,27 @@ public class Crossroads extends Agent{
         
         crossroadsAID = getAID();
         addBehaviour(new TickerBehaviour(this, 5000) {
+            @Override
             public void onTick() {
-                 //System.out.println("TICKd" + Crossroads.SMART);
+                
+                    // nastavenie cervenej vsade
                     setZero(); 
-                if((Crossroads.SMART) && (!Crossroads.SMARTtempOFF)){
-                    Crossroads.SMARTcount++;
+                    
+                    // mod krizovatky
+                    // SMART - inteligentne prepinanie
+                    // !SMART - cyklenie 4 stavov
+                    // SMARTtempOFF - raz prejde 4 hlavne stavy, sluzi na  zabranenie
+                    // vyhladovaniu malo vyzadovanych smerov (zapina sa periodicky)
+                    if((Crossroads.SMART) && (!Crossroads.SMARTtempOFF)){
+                        Crossroads.SMARTcount++;
                     if (Crossroads.SMARTcount == 7) {
                         Crossroads.SMARTtempOFF = true;
                         Crossroads.SMARTcount=0;
                     }
+                    
+                    // vypocet aut v jednotlivych smeroch
+                    
+                    // tieto 4 stavy zodpovedaju tomu ako ta krizovatka v reale funguje
                     int westCars = WESTtoNORTHcars + WESTtoEASTcars + WESTtoSOUTHcars;
                     int eastCars = EASTtoNORTHcars + EASTtoWESTcars + EASTtoSOUTHcars;
                     int southCars = SOUTHtoWESTcars + SOUTHtoNORTHcars + SOUTHtoEASTcars;
@@ -111,17 +128,22 @@ public class Crossroads extends Agent{
                     if (max == eastCars) maxPos = 1;
                     else if (max == southCars) maxPos = 2;
                     else if (max == northCars) maxPos = 3;*/
-                   
+                    
+                   // najziadanejsi smer
                     for(int i = 0; i < numbers.length; i++) {
                         if(numbers[i] > numbers[maxPos]) {
                             maxPos = i;
                         }
                     }
                     
+                    
+                    // kontrola, jeden sme nemozew byt 3krat po sebe
                     LASTSTATE2 = LASTSTATE;
                     LASTSTATE = STATE-1;
                     if (LASTSTATE <0) LASTSTATE = 3;
                     
+                    // pokial nie je tretikrat nastavime ho, inak sa pocita
+                    // druhy najlepsi
                     if(maxPos != LASTSTATE2) STATE = maxPos;
                     else  {
                         int max;
@@ -136,12 +158,17 @@ public class Crossroads extends Agent{
                         STATE = max;
                     }
                     
+                    // pokial sa vypocitany stav a predosly stav rovnaju
+                    // netreba prepinat semafory
                     if(STATE == LASTSTATE) Crossroads.WAIT = false;
                     System.out.println("maxPos " + westCars);
                     System.out.println("maxPos " + eastCars);
                     System.out.println("maxPos " + northCars);
                     System.out.println("maxPos " + southCars);
                 }
+                    
+                // bezpecnostna pauza aby vozidla stihli opustit krizovatky,
+                // nieco ako v reale oranzova
                 if (Crossroads.WAIT) {
                     
                     try {
@@ -151,15 +178,20 @@ public class Crossroads extends Agent{
                     }
                     Crossroads.WAIT = false;
                     //return;
-                }  
+                } 
+                
+                // periodicke zapnutie prechodu 4 hlavnymi stavmi na pustenie
+                // aut z malo vyuzivanych smerov
                 if(Crossroads.SMARTtempOFF) {
-                    System.out.println("TEMP OFF");
+                    //System.out.println("TEMP OFF");
                     Crossroads.SMARTOffcount++;
                     if (Crossroads.SMARTOffcount == 3) {
                         Crossroads.SMARTtempOFF = false;
                         Crossroads.SMARTOffcount=0;
                     }
                 }
+                
+                // stavy krizovatky, v podstate FSM
                 if (Crossroads.STATE == 0) {
                    
                     Crossroads.WESTtoEAST = Crossroads.WESTtoNORTH = Crossroads.NORTHtoWEST = 1;
@@ -247,6 +279,8 @@ public class Crossroads extends Agent{
                 
             }
             
+            
+            // nastavenie cervenej vsade
             private void setZero() {
                 
                Crossroads.WESTtoEAST = 0;Crossroads.WESTtoNORTH = 0;
@@ -259,6 +293,7 @@ public class Crossroads extends Agent{
        }
      
      
+     // metody na zistenie stavu
      public static int  getWestToEast() {
          return Crossroads.WESTtoEAST;
      }
@@ -295,6 +330,7 @@ public class Crossroads extends Agent{
          return Crossroads.WESTtoEASTcars;
      }
      
+      // metody na pohyb s poctami aut
      public static void WestToEastCarsInc() {
          Crossroads.WESTtoEASTcars++;
      }
@@ -376,6 +412,8 @@ public class Crossroads extends Agent{
      public static void NorthToWestCarsDec() {
          Crossroads.NORTHtoWESTcars--;
      }
+     
+     // zistenie kolko aut caka
      public static int getWEcars(){
          return WESTtoEASTcars;
      }
@@ -425,6 +463,6 @@ public class Crossroads extends Agent{
      }
      
      protected void takeDown() {
-       // System.out.println("Crossroads "+ getAID().getName()+ " has terminated"); 
+        System.out.println("Crossroads "+ getAID().getName()+ " has terminated"); 
     }
 }

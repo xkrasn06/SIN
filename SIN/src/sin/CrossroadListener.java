@@ -6,16 +6,12 @@
 package sin;
 
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.TickerBehaviour;
-import jade.core.behaviours.WakerBehaviour;
 import jade.lang.acl.ACLMessage;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Milan
+ * listener pre krizovatku, nastavuje pocty aut podla toho aka sprava mu pride
  */
 public class CrossroadListener extends CyclicBehaviour{
     
@@ -190,11 +186,11 @@ public class CrossroadListener extends CyclicBehaviour{
         
         
     }
-    
+    /*
     public void sendChanges() {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         for(int i=0; i<MainAgent.AgentList.size(); i++)
             msg.addReceiver(Crossroads.crossroadsAID);
-    }
+    }*/
     
 }

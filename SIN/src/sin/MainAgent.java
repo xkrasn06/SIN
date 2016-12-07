@@ -149,7 +149,7 @@ public class MainAgent extends Agent{
                     if ((endpointFromName==MainAgent.SOUTH) || (endpointFromName==MainAgent.NORTH))
                         type = 1;
                     boolean bus = false;
-                    if (randomInt > 95) bus = true;
+                    if (randomInt > 93) bus = true;
                     Object args[] = { endpointFromName, endpointToName, type, bus};
                 
                     try {   
