@@ -112,7 +112,7 @@ public class MainWindow{
 	    c.gridy = 0;
 	   // pane.add(lbl2, c);
 	    
-	    box1 = new JCheckBox("SMART",false);
+	    box1 = new JCheckBox("SMART",true);
 	    box1.setText("SMART");
             //box1.turnCheckBox.setSelected(isSelected);
 	    c.fill = GridBagConstraints.HORIZONTAL;

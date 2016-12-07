@@ -109,19 +109,19 @@ public class Crossroads extends Agent{
                     int eastCars = EASTtoNORTHcars + EASTtoWESTcars + EASTtoSOUTHcars;
                     int southCars = SOUTHtoWESTcars + SOUTHtoNORTHcars + SOUTHtoEASTcars;
                     int northCars = NORTHtoWESTcars + NORTHtoSOUTHcars + NORTHtoEASTcars;
-                    int[] numbers = new int[12];
+                    int[] numbers = new int[11];
                     numbers[0] = westCars;
                     numbers[1] = eastCars;
                     numbers[2] = southCars;
                     numbers[3] = northCars;
-                    numbers[4] = WESTtoNORTHcars + NORTHtoWESTcars + EASTtoSOUTHcars;
+                    numbers[4] = WESTtoNORTHcars + NORTHtoWESTcars + EASTtoSOUTHcars + SOUTHtoEASTcars;
                     numbers[5] = WESTtoEASTcars+EASTtoWESTcars;
                     numbers[6] = EASTtoSOUTHcars + SOUTHtoEASTcars + WESTtoNORTHcars + NORTHtoWESTcars;
                     numbers[7] = SOUTHtoNORTHcars + NORTHtoWESTcars + SOUTHtoEASTcars;
                     numbers[8] = SOUTHtoNORTHcars + SOUTHtoEASTcars + NORTHtoWESTcars;
                     numbers[9] = SOUTHtoWESTcars + NORTHtoEASTcars;
                     numbers[10] = NORTHtoSOUTHcars+SOUTHtoNORTHcars + NORTHtoWESTcars + SOUTHtoEASTcars;
-                    numbers[11] = NORTHtoWESTcars + WESTtoNORTHcars + SOUTHtoEASTcars;
+                    numbers[12] = NORTHtoWESTcars + WESTtoNORTHcars + SOUTHtoEASTcars;
                     
                     int maxPos = 0;
                    /* int max =Math.max(Math.max(westCars,eastCars),Math.max(southCars,northCars));
@@ -220,7 +220,7 @@ public class Crossroads extends Agent{
                 } else
                 if (Crossroads.STATE == 4) {
                     //System.out.println("TICKdfwaeaw");
-                    Crossroads.NORTHtoWEST = Crossroads.WESTtoNORTH = Crossroads.EASTtoSOUTH = 1;
+                    Crossroads.NORTHtoWEST = Crossroads.WESTtoNORTH = Crossroads.EASTtoSOUTH = Crossroads.SOUTHtoEAST = 1;
                     if (!Crossroads.SMART) Crossroads.STATE = 0;
                     else Crossroads.STATE = 5;
                     Crossroads.WAIT = true;
