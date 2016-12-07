@@ -51,6 +51,8 @@ public class MainAgent extends Agent{
         public static final int NORTHLINE = horupY-vertDiff*2;
         public static final int NORTHLINE2 = horupY-vertDiff;
         
+        
+        // zoznam agentov vozidiel
         public static class AgentListElement{
             public int  x;
             public int y;
@@ -67,7 +69,9 @@ public class MainAgent extends Agent{
                 this.bus = bus;
             }
         }
-        public static ArrayList<AgentListElement> AgentList = new ArrayList<AgentListElement>(); 
+        public static ArrayList<AgentListElement> AgentList = new ArrayList<AgentListElement>();
+        
+        
     protected void setup() {
           //  System.out.println("MainAgent "+ getAID().getName()+ " has started");
             String s= getAID().getName();
@@ -80,15 +84,16 @@ public class MainAgent extends Agent{
             final int from = this.WEST;
             final int to = this.EAST;
             createCrossroads();
+            // vytvorenie prvych dvoch vozidiel
+            // aby sa nieco dialo hned po zapnuti
+            // pozostatok z prvych fazi vyvoja, ponechane
             createNewVehicle(from,to);
+            createNewVehicle(to,from);
+            
+            // vytvaranie vozidiel cez GUI
             createVeh();
            
            
-            
-            createNewVehicle(to,from);
-        
-            
-        
     }
     
    
@@ -98,9 +103,10 @@ public class MainAgent extends Agent{
     
     public static void setPanel(PaintPanel p) {
         paint = p;
-        //paint.updateVehicles(20,30);
+        
     }
     
+    // vytvaranie vozidiel cez GUI
     public void createVeh() {
         addBehaviour(new CyclicBehaviour() {
 
@@ -110,6 +116,8 @@ public class MainAgent extends Agent{
                     int type = 0;
                     int endpointFromName = 0; 
                     int endpointToName =0;
+                    
+                    // nahodnie sa vyberie cielovy smer, rovnomerne
                     Random randomGenerator = new Random();
                     int randomInt = randomGenerator.nextInt(100);
                     if (CREATEEAST) {
@@ -146,12 +154,16 @@ public class MainAgent extends Agent{
                        CREATENORTH=false;
                     } 
                     
+                    // ina orientacia vozidla
                     if ((endpointFromName==MainAgent.SOUTH) || (endpointFromName==MainAgent.NORTH))
                         type = 1;
                     boolean bus = false;
+                    
+                    // 7 percenta sanca na to ze vozidlo je bus
                     if (randomInt > 93) bus = true;
                     Object args[] = { endpointFromName, endpointToName, type, bus};
-                
+                    
+                    // samotne vytvorenie
                     try {   
                         AgentController agent = carAgentContainer.createNewAgent("car-" + vehicleAgents, VehicleAgent.class.getCanonicalName(), args);
                         agent.start();
@@ -160,12 +172,15 @@ public class MainAgent extends Agent{
                         System.err.println("Error creating car agents");
                         e.printStackTrace();
                     }
+                    
+                    // dalsie sa nevytvori kym nie je stlacene tlacidlo
                     MainAgent.CREATE = false;
             }
 
         });
     }
     
+    // deprecated
     public void createNewVehicle(final int endpointFromName, final int endpointToName) {
 	addBehaviour(new OneShotBehaviour() {
 
@@ -188,6 +203,7 @@ public class MainAgent extends Agent{
         });
     }
     
+    // vytvorenie krizovatky
     public void createCrossroads() {
 	addBehaviour(new OneShotBehaviour() {
 

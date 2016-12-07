@@ -19,6 +19,10 @@ public class PaintPanel extends JPanel {
       //  int SB1 = MainWindow.getSB1();
         static final int x = 705;
         static final int y = 405;
+        
+        // povodne malo byt vykreslovanie parametricke
+        // ale trochu sa to vymklo z ruk
+        
         // Y suradnice cesty zlava
         public static final int vertWidth = 150;
         public static final int vertDiff = 50;
@@ -66,6 +70,8 @@ public class PaintPanel extends JPanel {
         public boolean getSKY() {
             return SKY;
         }
+        
+        // vykreslenie sipok na cestach
         void drawArrow(Graphics g1, int x1, int y1, int x2, int y2) {
                 Graphics2D g = (Graphics2D) g1.create();
 
@@ -80,7 +86,9 @@ public class PaintPanel extends JPanel {
                 g.drawLine(0, 0, len, 0);
                 g.fillPolygon(new int[] {len, len-ARR_SIZE, len-ARR_SIZE, len},
                               new int[] {0, -ARR_SIZE, ARR_SIZE, 0}, 4);
-            }
+        }
+        
+        // vykreslenie vozidiel
         public void paintVehicle(Graphics g) {
             Graphics2D g2D = (Graphics2D) g;
           //  super.paintComponent(g);
@@ -102,7 +110,7 @@ public class PaintPanel extends JPanel {
             
         }
         
-        
+        // vykreslenie krizovatky, hranice, ciary, semafory
         @Override
 	public void paintComponent(Graphics g){
                 Graphics2D g2D = (Graphics2D) g;
@@ -292,109 +300,20 @@ public class PaintPanel extends JPanel {
                g2D.fillOval(thirdX+vertDiff/2+vertDiff*2,horupY-vertDiff/2, 15,15 );
                g.setColor(Color.green);
                paintVehicle(g);
-              // this.paintBackground =true;
-             /*       spectral_color((double) SB3);
-                    g.setColor(Color.black);
-             
-                    g.setFont(new Font("Courier New", Font.BOLD, 20));
-                    g.drawString("Value: " + SB3 + "nm", 1170,15);
-                    g.drawString("Value: " + SB2, 450,15);
-                    g.drawString("Value: " + SB1 + "x10^(-10) m", 80,15);
-                    g.drawString("Light Source", 20,380);
-                    Color c = new Color((float) red, (float) green, (float)blue);
-                    g.setColor(c);
-                    float dash1[] = {10.0f};
-                    g2D.setStroke(new BasicStroke(5.0f,
-                        BasicStroke.CAP_BUTT,
-                        BasicStroke.JOIN_MITER,
-                        10.0f, dash1, 0.0f));
               
-               
-                    g2D.drawLine(75,415, x+10+(int) I,y+10+(int) I);
-                    g2D.setStroke(new BasicStroke(5));
-                    g.setColor(Color.black);
-                    g.fillRect(55, 390, 20, 50);
-                    g.setColor(c);
-                    int dx2 = 15;
-                    int dy2 = 15;
-                    int step = 360/N;
-                    
-                    for (int i = 0; i<360; i+=step) {
-                        int randomInt;
-                        double length2;
-                        double sine;
-                        double cosine;
-                        int sinx;
-                        int cosy;
-    
-                        if (MainWindow.getCheck()) {
-                            int j = i;
-                            Random randomGenerator = new Random();
-                            randomInt = randomGenerator.nextInt(360);
-                            i = randomInt;
-                            System.out.format("The value of i is: %d%n", i);
-                            length2 = (1 + Math.pow(Math.cos(Math.abs(i)*Math.PI/180),2))*length;
-                    
-                            sine=   Math.sin(Math.toRadians( (double) i ))*length2;
-                            cosine =  Math.cos(Math.toRadians ((double) i)  )*length2;
-                            sinx = (int) Math.round(sine);
-                            cosy = (int) Math.round(cosine);
-                            i = j;
-                        }
-                        else {
-                            length2 = (1 + Math.pow(Math.cos(Math.abs(i)*Math.PI/180),2))*length;
-                           
-                            sine=   Math.sin(Math.toRadians( (double) i ))*length2;
-                            cosine =  Math.cos(Math.toRadians ((double) i)  )*length2;
-                            sinx = (int) Math.round(sine);
-                            cosy = (int) Math.round(cosine);
-                        }
-                     
-                  
-                        g2D.drawLine(x+dx2,y+dy2, x+cosy+dx2,y+sinx+dy2);
-                        if (N == 1) break;
-                    
-                    }
-                    System.out.format("TTTTTTTTTTTTTTTTTTT%n");
-                   
-                    g.setColor(Color.black);
-                    g.fillOval(x, y, 30, 30);
-               */  
 	}
-        public void updateVehicles(int x, int y) {
+        /*public void updateVehicles(int x, int y) {
             this.posX = x;
             this.posY = y;
             System.out.format("Vehicle Pos%n" + x,y);
             repaint();
-        }
+        }*/
 	
         public void updateValues() {
           repaint();
-          //  MainWindow.setMax(SB3/10);
-           // System.out.format("The value of con is: %d%n", N);
-         
-           
-           
-           /* double con = 8*Math.pow(PI,4)*SB1*1; //0.00000000751;
-           System.out.format("The value of con is: %g%n", con);
-           
-            double cosine = 1.5;
-            I = (con*size*cosine)/(1*Math.pow(SB3,4));
-              System.out.format("The value of size is: %g%n", particle);
-                System.out.format("The value of length is: %g%n", length);*/
-            
-            
-            /*Timer timer = new Timer(20, (ActionListener) this);
-            timer.setInitialDelay(190);
-            timer.start();*/
-           // for (int i =700; i>=400; i-=50) {
-            //    SB3 = i;
           
-           // repaint();
-          
-         //   }
         }
-     // http://stackoverflow.com/questions/3407942/rgb-values-of-visible-spectrum/22681410#22681410   
+    
      
        
 }

@@ -12,6 +12,7 @@ import jade.lang.acl.ACLMessage;
  *
  * @author Milan
  * listener pre krizovatku, nastavuje pocty aut podla toho aka sprava mu pride
+ * BUS sa rata za 11 vozidiel (1 standard + 10 extra)
  */
 public class CrossroadListener extends CyclicBehaviour{
     

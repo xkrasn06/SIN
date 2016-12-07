@@ -16,6 +16,7 @@ import static sin.PaintPanel.vertDiff;
 /**
  *
  * @author Milan
+ * agent vozidla
  */
 public class VehicleAgent extends Agent {
     
@@ -26,14 +27,14 @@ public class VehicleAgent extends Agent {
     
     protected void setup() {
       //    System.out.println("Vehicle Agent "+ getAID().getName()+ " has started");
-          Object[] args = getArguments();
-          int from = (int) args[0];
-          int to = (int) args[1];
-          int type = (int) args[2];
-          boolean bus = (boolean) args[3];
-         // System.out.println("Vehicle Agent path "+ from + to);
-          
-       //  System.out.println("True "+ from + to);
+         Object[] args = getArguments();
+         int from = (int) args[0];
+         int to = (int) args[1];
+         int type = (int) args[2];
+         boolean bus = (boolean) args[3];
+         
+         
+         // nastavenie vychodzej pozicie
          int x =0,y=0;
          if((from == MainAgent.EAST) && (to==MainAgent.WEST)) {      
                 x = PaintPanel.fifthX-80;
@@ -77,26 +78,28 @@ public class VehicleAgent extends Agent {
          MainAgent.AgentListElement a;
          a = new MainAgent.AgentListElement(x,y,type,s,bus);
          MainAgent.AgentList.add(a);
+         
+         // prihlasenie sa krizovatke
          sendWelcomeMessage(from,to, true, bus);
+         
+         // behaviour vozidla
          addBehaviour(new CarBehaviour(s, from, to, bus));
          
           
     }
     
+    // korektne zrusenie agenta
     protected void takeDown() {
-      /*   for (int i = 0; i < MainAgent.AgentList.size(); i++) {
-              System.out.println("WRITING " + MainAgent.AgentList.get(i).name);
-         }*/
+      
             
         for (int i = 0; i < MainAgent.AgentList.size(); i++) {
-      //       System.out.println("DESTROYING " + getAID().getName());
+      
             if(MainAgent.AgentList.get(i).name.equals(getAID().getName())) {
                 MainAgent.AgentList.remove(i);
-         //       System.out.println("DESTROYED "+getAID().getName());
                 break;
             }
 	}
-      //  System.out.println("Vehicle Agent "+ getAID().getName()+ " has terminated"); 
+      
     }
     
     public void sendWelcomeMessage(int from, int to, boolean dir, boolean bus) {

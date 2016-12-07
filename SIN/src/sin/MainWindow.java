@@ -15,8 +15,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.BoundedRangeModel;
 import javax.swing.JButton;
@@ -26,6 +24,8 @@ import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.SwingConstants;
 
+
+// vytvorenie GUI
 public class MainWindow{
 
 	
@@ -34,17 +34,17 @@ public class MainWindow{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static JLabel lbl1;
-	private static JLabel lbl2;
-	private static JLabel lbl3;
-        private static JLabel lbl4;
+	//private static JLabel lbl1;
+	//private static JLabel lbl2;
+	//private static JLabel lbl3;
+        //private static JLabel lbl4;
 	private static JScrollBar sb1;
 	private static JScrollBar sb2;
 	private static JScrollBar sb3;
-        private static JScrollBar sb4;
+        //private static JScrollBar sb4;
 	public static PaintPanel paint;
-        private static int maxSize = 40;
-        private static BoundedRangeModel model1;
+        //private static final int maxSize = 40;
+       // private static BoundedRangeModel model1;
         private static JCheckBox box1;
         private static JButton btn1;
         private static JButton btn2;
@@ -54,12 +54,12 @@ public class MainWindow{
       
 	
 	final static boolean shouldFill = true;
-    final static boolean shouldWeightX = true;
-    final static boolean RIGHT_TO_LEFT = false;
+        final static boolean shouldWeightX = true;
+        final static boolean RIGHT_TO_LEFT = false;
     
-    public static int getSB3() {
+   /* public static int getSB3() {
         return sb3.getValue();
-    }
+    }*/
     public static int getSB2() {
         return sb2.getValue();
     }
@@ -96,7 +96,7 @@ public class MainWindow{
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	    }
 	    
-	    lbl1 = new JLabel("SPAWN FROM WEST", SwingConstants.CENTER);
+	    //lbl1 = new JLabel("SPAWN FROM WEST", SwingConstants.CENTER);
 	    if (shouldWeightX) {
 	  //  c.weightx = 0.5;
 	    }
@@ -105,7 +105,7 @@ public class MainWindow{
 	    c.gridy = 0;
 	   // pane.add(lbl1, c);
 	 
-	    lbl2 = new JLabel("SPAWN FROM SOUTH", SwingConstants.CENTER);
+	   // lbl2 = new JLabel("SPAWN FROM SOUTH", SwingConstants.CENTER);
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	   // c.weightx = 0.2;
 	    c.gridx = 1;
@@ -121,7 +121,7 @@ public class MainWindow{
 	    c.gridy = 0;
 	    pane.add(box1, c);
 	 
-	    lbl3 = new JLabel("SPAWN FROM EAST", SwingConstants.CENTER);
+	   // lbl3 = new JLabel("SPAWN FROM EAST", SwingConstants.CENTER);
 	    c.fill = GridBagConstraints.HORIZONTAL;
 	  //  c.weightx = 0.3;
 	    c.gridx = 3;
