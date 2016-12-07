@@ -67,7 +67,7 @@ public class Crossroads extends Agent{
     public static int crossroadInUseSouth = 0;
     public static AID crossroadsAID;
     
-    public static boolean SMART = false;
+    public static boolean SMART = true;
     public static int SMARTcount = 0;
     public static int SMARTOffcount = 0;
     public static boolean SMARTtempOFF = false;
@@ -109,7 +109,7 @@ public class Crossroads extends Agent{
                     int eastCars = EASTtoNORTHcars + EASTtoWESTcars + EASTtoSOUTHcars;
                     int southCars = SOUTHtoWESTcars + SOUTHtoNORTHcars + SOUTHtoEASTcars;
                     int northCars = NORTHtoWESTcars + NORTHtoSOUTHcars + NORTHtoEASTcars;
-                    int[] numbers = new int[11];
+                    int[] numbers = new int[12];
                     numbers[0] = westCars;
                     numbers[1] = eastCars;
                     numbers[2] = southCars;
@@ -121,7 +121,7 @@ public class Crossroads extends Agent{
                     numbers[8] = SOUTHtoNORTHcars + SOUTHtoEASTcars + NORTHtoWESTcars;
                     numbers[9] = SOUTHtoWESTcars + NORTHtoEASTcars;
                     numbers[10] = NORTHtoSOUTHcars+SOUTHtoNORTHcars + NORTHtoWESTcars + SOUTHtoEASTcars;
-                    numbers[12] = NORTHtoWESTcars + WESTtoNORTHcars + SOUTHtoEASTcars;
+                    numbers[11] = NORTHtoWESTcars + WESTtoNORTHcars + SOUTHtoEASTcars;
                     
                     int maxPos = 0;
                    /* int max =Math.max(Math.max(westCars,eastCars),Math.max(southCars,northCars));
@@ -161,10 +161,7 @@ public class Crossroads extends Agent{
                     // pokial sa vypocitany stav a predosly stav rovnaju
                     // netreba prepinat semafory
                     if(STATE == LASTSTATE) Crossroads.WAIT = false;
-                    System.out.println("maxPos " + westCars);
-                    System.out.println("maxPos " + eastCars);
-                    System.out.println("maxPos " + northCars);
-                    System.out.println("maxPos " + southCars);
+                 
                 }
                     
                 // bezpecnostna pauza aby vozidla stihli opustit krizovatky,

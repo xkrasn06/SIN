@@ -173,7 +173,7 @@ public class MainWindow{
 	    c.gridy = 2;
 	    pane.add(paint, c);
             
-             AdjustmentListener listener = new MyAdjustmentListener(paint);
+             //AdjustmentListener listener = new MyAdjustmentListener(paint);
  
         
              box1.addActionListener(new ActionListener() {

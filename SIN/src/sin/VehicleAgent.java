@@ -99,6 +99,7 @@ public class VehicleAgent extends Agent {
                 break;
             }
 	}
+        System.out.println("Vehicle agent "+ getAID().getName()+ " has terminated");
       
     }
     

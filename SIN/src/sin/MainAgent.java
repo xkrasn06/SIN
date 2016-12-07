@@ -98,7 +98,7 @@ public class MainAgent extends Agent{
     
    
     protected void takeDown() {
-       // System.out.println("MainAgent "+ getAID().getName()+ " has terminated"); 
+        System.out.println("MainAgent "+ getAID().getName()+ " has terminated"); 
     }
     
     public static void setPanel(PaintPanel p) {
